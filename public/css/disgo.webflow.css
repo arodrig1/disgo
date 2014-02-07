@@ -1,0 +1,114 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #333;
+  font-size: 14px;
+  line-height: 20px;
+}
+h1 {
+  margin: 10px 0px;
+  font-size: 38px;
+  line-height: 44px;
+  font-weight: 700;
+}
+h2 {
+  margin: 10px 0px;
+  font-size: 32px;
+  line-height: 36px;
+  font-weight: 700;
+}
+h3 {
+  margin: 10px 0px;
+  font-size: 24px;
+  line-height: 30px;
+  font-weight: 700;
+}
+h4 {
+  margin: 10px 0px;
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 700;
+}
+h5 {
+  margin: 10px 0px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 700;
+}
+h6 {
+  margin: 10px 0px;
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 700;
+}
+p {
+  margin-bottom: 5px;
+}
+.button {
+  display: inline-block;
+  padding: 4px 15px;
+  background-color: black;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+}
+@media (max-width: 991px) {
+}
+@media (max-width: 767px) {
+}
+@media (max-width: 479px) {
+  .button {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    clear: both;
+  }
+  .button.large {
+    margin-top: 2px;
+    margin-bottom: 1px;
+  }
+  .full-width {
+    display: block;
+    margin: 2px auto;
+    clear: both;
+  }
+  .nav-menu {
+    float: left;
+  }
+  .slider-date {
+    display: block;
+    height: 40px;
+    min-height: 40px;
+    margin-right: auto;
+    margin-left: auto;
+    padding-top: 0px;
+  }
+  .arrow.left {
+    display: inline-block;
+    float: left;
+  }
+  .arrow.right {
+    display: inline-block;
+    float: right;
+  }
+  .date {
+    display: inline-block;
+    width: 300px;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+  }
+  .arrow-div {
+    display: inline-block;
+  }
+  .arrow-div.arrow-right {
+    float: right;
+  }
+  .ride-display {
+    display: inline-block;
+  }
+  .ride-div {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
