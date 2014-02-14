@@ -1,0 +1,19 @@
+{
+	"drivers": [
+		{
+			"id": 1,
+			"name": "Mark Valentine",
+			"username": "markolas"
+		}
+	],
+
+	"riders": [
+		{
+			"id": 1,
+			"name": "Joe McHurtin",
+			"username": "ouchie"
+		}
+	]
+
+
+}
