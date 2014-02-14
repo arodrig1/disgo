@@ -13,6 +13,12 @@ exports.request = function(req, res) {
 exports.submit = function(req, res) {
 	console.log("Logging requested ride in database...");
   	//req.session.returnTo = request.path;
+  	var newRide = {
+  		"from": "Wilbur",
+  		"to": "Hewlett",
+  		"time": "4:00pm"
+  	}
+  	data["rides"].push(newRide);
   	res.redirect('/rider/home', data);
 };
 
