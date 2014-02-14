@@ -48,6 +48,9 @@ app.get('/', index.view);
 app.get('/login', login.view);
 //app.post('/login', passport.authenticate('local', { successRedirect: '/', failureRedirect: '/login' }));
 
+app.get('/about', index.about);
+app.get('/help', index.help);
+
 app.get('/rider/home', rider.home);
 
 app.get('/driver/home', driver.home);
