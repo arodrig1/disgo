@@ -19,7 +19,7 @@ exports.submit = function(req, res) {
   		"time": "4:00pm"
   	}
   	data["rides"].push(newRide);
-  	res.redirect('/rider/home', data);
+  	res.render('rider/home', data);
 };
 
 exports.review = function(req, res) {
