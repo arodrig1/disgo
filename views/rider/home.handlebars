@@ -1,10 +1,8 @@
 <!DOCTYPE html>
-<!-- This site was created in Webflow. http://www.webflow.com-->
-<!-- Last Published: Fri Feb 07 2014 04:50:01 GMT+0000 (UTC) -->
-<html data-wf-site="52f021d8a8b031ee5c000120">
+<html>
 <head>
   <meta charset="utf-8">
-  <title>DisGo - Driver Home</title>
+  <title>DisGo - Rider Home</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="/css/normalize.css">
   <link rel="stylesheet" type="text/css" href="/css/webflow.css">
@@ -37,48 +35,15 @@
             <li></li>
           </ul>
         </div>
-        <div class="w-slide">
+        {{#each rides}}
+        <div class="w-slide" id="ride{{id}}">
           <ul>
-            <li></li>
-            <li></li>
-            <li></li>
+            <li>{{from}}</li>
+            <li>{{to}}</li>
+            <li>{{time}}</li>
           </ul>
         </div>
-        <div class="w-slide">
-          <ul>
-            <li></li>
-            <li></li>
-            <li></li>
-          </ul>
-        </div>
-        <div class="w-slide">
-          <ul>
-            <li></li>
-            <li></li>
-            <li></li>
-          </ul>
-        </div>
-        <div class="w-slide">
-          <ul>
-            <li></li>
-            <li></li>
-            <li></li>
-          </ul>
-        </div>
-        <div class="w-slide">
-          <ul>
-            <li></li>
-            <li></li>
-            <li></li>
-          </ul>
-        </div>
-        <div class="w-slide">
-          <ul>
-            <li></li>
-            <li></li>
-            <li></li>
-          </ul>
-        </div>
+        {{/each}}
       </div>
       <div class="w-slider-arrow-left">
         <div class="w-icon-slider-left"></div>
@@ -91,6 +56,6 @@
   </div>
   <div></div>
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-  <script type="text/javascript" src="js/webflow.js"></script>
+  <script type="text/javascript" src="/js/webflow.js"></script>
 </body>
 </html>

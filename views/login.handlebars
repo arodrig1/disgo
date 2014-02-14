@@ -1,40 +1,35 @@
-<!doctype html>
-
+<!DOCTYPE html>
 <html>
 <head>
-  <title>DisGo - Login</title>  
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="/css/bootstrap.min.css" rel="stylesheet">
-  <link href="/css/bootstrap-theme.min.css" rel="stylesheet">
-  <link href="/css/webflow.css" rel="stylesheet">
-  <!-- this is a comment in HTML -->
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-    <![endif]-->        
+    <meta charset="utf-8">
+    <title>DisGo - Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/css/webflow.css">
+    <link rel="stylesheet" type="text/css" href="/css/disgo.webflow.css">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap-theme.min.css" rel="stylesheet">
+    <script>
+      if (/mobile/i.test(navigator.userAgent)) document.documentElement.className += ' w-mobile';
+    </script>
+    <link rel="shortcut icon" type="image/x-icon" href="https://y7v4p6k4.ssl.hwcdn.net/placeholder/favicon.ico">
+    <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
 </head>
 
 <body>
-  <div>
-    <div class="w-container">
-      <h1>DisGo</h1>
+    {{> navbar}}
+    <div>
+      <div class="w-container"><a class="button large" href="rider/home">Rider</a>
+      </div>
+      <div class="w-container"><a class="button large" href="driver/home">Driver</a>
+      </div>
+      <div class="w-container"><a class="button large" href="coordinator/home">Coordinator</a>
+      </div>
     </div>
-  </div>
-  <div>
-    <img class="full-width" src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg" alt="image-placeholder.svg">
-  </div>
-  <div>
-    <div class="w-container"><a class="button large" href="#">Rider</a>
-    </div>
-    <div class="w-container"><a class="button large" href="#">Driver</a>
-    </div>
-    <div class="w-container"><a class="button large" href="#">Coordinator</a>
-    </div>
-  </div>
-</body>
 
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="js/webflow.js"></script>
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+</body>
 </html>

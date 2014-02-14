@@ -2,7 +2,7 @@
 <html data-wf-site="52f021d8a8b031ee5c000120">
 <head>
   <meta charset="utf-8">
-  <title>DisGo - Request Ride</title>
+  <title>DisGo - Review Ride</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="/css/normalize.css">
   <link rel="stylesheet" type="text/css" href="/css/webflow.css">
@@ -16,10 +16,10 @@
 <body>
   {{> navbar}}
   <div>
-    <h1>Request a Ride</h1>
+    <h1>Review Ride</h1>
   </div>
   <div class="w-form">
-    <form name="wf-form-request-ride-form" action="/rides/submit" method="post" data-name="Request Ride Form">
+    <form name="wf-form-request-ride-form" action="/rides/submit" data-name="Request Ride Form">
       <label for="from">From:</label>
       <select class="w-select" name="dropdown">
         <option value="">Select one...</option>
@@ -51,6 +51,6 @@
     </div>
   </div>
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-  <script type="text/javascript" src="/js/webflow.js"></script>
+  <script type="text/javascript" src="js/webflow.js"></script>
 </body>
 </html>

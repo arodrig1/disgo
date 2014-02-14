@@ -1,3 +1,5 @@
 exports.home = function(req, res){
-  res.render('rider/home');
+	console.log("Loading user's rides from database...");
+	var rides = [];
+  	res.render('rider/home');
 };

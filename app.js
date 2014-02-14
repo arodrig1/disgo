@@ -13,8 +13,10 @@ var index = require('./routes/index');
 // Example route
 // var user = require('./routes/user');
 var login = require('./routes/login');
-var rides = require('./routes/rides');
 var rider = require('./routes/rider');
+var driver = require('./routes/driver');
+var coordinator = require('./routes/coordinator');
+var rides = require('./routes/rides');
 
 var app = express();
 
@@ -44,9 +46,22 @@ app.get('/', index.view);
 // Example route
 // app.get('/users', user.list);
 app.get('/login', login.view);
+//app.post('/login', passport.authenticate('local', { successRedirect: '/', failureRedirect: '/login' }));
+
 app.get('/rider/home', rider.home);
+
+app.get('/driver/home', driver.home);
+app.get('/driver/calendar', driver.calendar);
+
+app.get('/coordinator/home', coordinator.home);
+
+app.get('/rides', rides.list);
 app.get('/rides/request', rides.request);
-app.get('/rides/edit', rides.edit);
+app.post('/rides/submit', rides.submit);
+app.get('/rides/:id/review', rides.review);
+app.post('/rides/:id/approve', rides.approve);
+app.get('/rides/:id/edit', rides.edit);
+
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
