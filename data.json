@@ -19,7 +19,28 @@
 			"from": "Crothers",
 			"to": "History Corner",
 			"time": "3:00pm"
+		},
+		{
+			"from": "Slav",
+			"to": "Law School",
+			"time": "4:30pm"
+		},
+		{
+			"from": "Gates",
+			"to": "Serra",
+			"time": "5:00pm"
+		},
+		{
+			"from": "Terra",
+			"to": "Huang",
+			"time": "12:40pm"
+		},
+		{
+			"from": "Building 300",
+			"to": "Columbae",
+			"time": "11:00am"
 		}
+
 	]
 
 }
