@@ -20,7 +20,7 @@
   <div>
     <div class="w-slider" data-animation="slide" data-duration="500" data-infinite="1">
       <div class="w-slider-mask">
-        <div class="w-slide">
+        <!--<div class="w-slide">
           <ul>
             <li>
               <div class="w-container"></div>
@@ -34,7 +34,7 @@
             <li></li>
             <li></li>
           </ul>
-        </div>
+        </div> -->
         {{#each rides}}
         <div class="w-slide" id="ride{{id}}">
           <ul>
@@ -42,6 +42,7 @@
             <li>{{to}}</li>
             <li>{{time}}</li>
           </ul>
+          <a href="/rides/1/edit">Edit</a>
         </div>
         {{/each}}
       </div>
