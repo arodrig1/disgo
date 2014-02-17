@@ -9,6 +9,24 @@ var path = require('path');
 var handlebars = require('express3-handlebars');
 var partials = require('express-partials');
 
+var passport = require('passport')
+  , LocalStrategy = require('passport-local').Strategy;
+
+passport.use(new LocalStrategy(
+  function(username, password, done) {
+    User.findOne({ username: username }, function(err, user) {
+      if (err) { return done(err); }
+      if (!user) {
+        return done(null, false, { message: 'Incorrect username.' });
+      }
+      if (!user.validPassword(password)) {
+        return done(null, false, { message: 'Incorrect password.' });
+      }
+      return done(null, user);
+    });
+  }
+));
+
 var index = require('./routes/index');
 // Example route
 // var user = require('./routes/user');
@@ -36,6 +54,16 @@ app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(partials());
 
+app.configure(function() {
+  app.use(express.static('public'));
+  app.use(express.cookieParser());
+  app.use(express.bodyParser());
+  app.use(express.session({ secret: 'keyboard cat' }));
+  app.use(passport.initialize());
+  app.use(passport.session());
+  app.use(app.router);
+});
+
 // development only
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
@@ -46,7 +74,11 @@ app.get('/', index.view);
 // Example route
 // app.get('/users', user.list);
 app.get('/login', login.view);
-//app.post('/login', passport.authenticate('local', { successRedirect: '/', failureRedirect: '/login' }));
+app.post('/login',
+  passport.authenticate('local', { successRedirect: '/',
+                                   failureRedirect: '/login',
+                                   failureFlash: true })
+);
 
 app.get('/about', index.about);
 app.get('/help', index.help);
