@@ -3,6 +3,7 @@
  * Module dependencies.
  */
 
+var flash = require('connect-flash');
 var express = require('express');
 var http = require('http');
 var path = require('path');
@@ -13,6 +14,17 @@ var partials = require('express-partials');
 var passport = require('passport')
   , LocalStrategy = require('passport-local').Strategy;
 
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+  findById(id, function (err, user) {
+    if (err) done(err);
+    done(null, user);
+  });
+});
+
 passport.use(new LocalStrategy(
   function(username, password, done) {
     User.findOne({ username: username }, function(err, user) {
@@ -20,10 +32,12 @@ passport.use(new LocalStrategy(
       if (!user) {
         return done(null, false, { message: 'Incorrect username.' });
       }
-      if (!user.validPassword(password)) {
-        return done(null, false, { message: 'Incorrect password.' });
-      }
-      return done(null, user);
+
+      hash(password, user.salt, function (err, hash) {
+        if (err) { return done(err); }
+        if (hash == user.hash) return done(null, user);
+        done(null, false, { message: 'Incorrect password.' });
+      });
     });
   }
 ));
@@ -38,6 +52,17 @@ var coordinator = require('./routes/coordinator');
 var rides = require('./routes/rides');
 
 var app = express();
+
+app.configure(function() {
+  app.use(express.static('public'));
+  app.use(express.cookieParser());
+  app.use(express.bodyParser());
+  app.use(express.session({ secret: 'keyboard cat' }));
+  app.use(flash());
+  app.use(passport.initialize());
+  app.use(passport.session());
+  app.use(app.router);
+});
 
 mongoose.connect(MONGO.local, MONGO.options);
 
@@ -56,16 +81,6 @@ app.use(express.session());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(partials());
-
-app.configure(function() {
-  app.use(express.static('public'));
-  app.use(express.cookieParser());
-  app.use(express.bodyParser());
-  app.use(express.session({ secret: 'keyboard cat' }));
-  app.use(passport.initialize());
-  app.use(passport.session());
-  app.use(app.router);
-});
 
 // development only
 if ('development' == app.get('env')) {
