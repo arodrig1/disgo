@@ -64,6 +64,23 @@ app.configure(function() {
   app.use(app.router);
 });
 
+var MONGO = {
+    local: 'mongodb://localhost/disgoDB', 
+    options: {
+        server:{
+            auto_reconnect: true,
+            poolSize: 10,
+            socketOptions:{
+                keepAlive: 1
+            }
+        },
+        db: {
+            numberOfRetries: 10,
+            retryMiliSeconds: 1000
+        }
+    }
+}
+
 mongoose.connect(MONGO.local, MONGO.options);
 
 // all environments
@@ -87,10 +104,7 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-// Add routes here
 app.get('/', index.view);
-// Example route
-// app.get('/users', user.list);
 app.get('/login', login.view);
 app.post('/login',
   passport.authenticate('local', { successRedirect: '/',
