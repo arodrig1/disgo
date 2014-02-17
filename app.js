@@ -6,6 +6,7 @@
 var express = require('express');
 var http = require('http');
 var path = require('path');
+var mongoose = require('mongoose')
 var handlebars = require('express3-handlebars');
 var partials = require('express-partials');
 
