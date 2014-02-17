@@ -63,6 +63,8 @@ app.configure(function() {
   app.use(app.router);
 });
 
+mongoose.connect(MONGO.local, MONGO.options);
+
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
