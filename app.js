@@ -13,18 +13,14 @@ var partials = require('express-partials');
 var passport = require('passport')
   , LocalStrategy = require('passport-local').Strategy;
 
-var users = [
-    { id: 1, username: 'bob', password: 'secret', email: 'bob@example.com' }
-  , { id: 2, username: 'joe', password: 'birthday', email: 'joe@example.com' }
-];
-
 passport.serializeUser(function(user, done) {
   done(null, user.id);
 });
 
 passport.deserializeUser(function(id, done) {
   findById(id, function (err, user) {
-    done(err, user);
+    if (err) done(err);
+    done(null, user);
   });
 });
 
@@ -35,10 +31,12 @@ passport.use(new LocalStrategy(
       if (!user) {
         return done(null, false, { message: 'Incorrect username.' });
       }
-      if (!user.validPassword(password)) {
-        return done(null, false, { message: 'Incorrect password.' });
-      }
-      return done(null, user);
+
+      hash(password, user.salt, function (err, hash) {
+        if (err) { return done(err); }
+        if (hash == user.hash) return done(null, user);
+        done(null, false, { message: 'Incorrect password.' });
+      });
     });
   }
 ));
