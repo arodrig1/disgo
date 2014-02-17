@@ -38,6 +38,8 @@ var rides = require('./routes/rides');
 
 var app = express();
 
+mongoose.connect(MONGO.local, MONGO.options);
+
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
