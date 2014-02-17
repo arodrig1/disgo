@@ -3,6 +3,7 @@
  * Module dependencies.
  */
 
+var flash = require('connect-flash');
 var express = require('express');
 var http = require('http');
 var path = require('path');
@@ -11,6 +12,21 @@ var partials = require('express-partials');
 
 var passport = require('passport')
   , LocalStrategy = require('passport-local').Strategy;
+
+var users = [
+    { id: 1, username: 'bob', password: 'secret', email: 'bob@example.com' }
+  , { id: 2, username: 'joe', password: 'birthday', email: 'joe@example.com' }
+];
+
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+  findById(id, function (err, user) {
+    done(err, user);
+  });
+});
 
 passport.use(new LocalStrategy(
   function(username, password, done) {
@@ -38,6 +54,17 @@ var rides = require('./routes/rides');
 
 var app = express();
 
+app.configure(function() {
+  app.use(express.static('public'));
+  app.use(express.cookieParser());
+  app.use(express.bodyParser());
+  app.use(express.session({ secret: 'keyboard cat' }));
+  app.use(flash());
+  app.use(passport.initialize());
+  app.use(passport.session());
+  app.use(app.router);
+});
+
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
@@ -53,16 +80,6 @@ app.use(express.session());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(partials());
-
-app.configure(function() {
-  app.use(express.static('public'));
-  app.use(express.cookieParser());
-  app.use(express.bodyParser());
-  app.use(express.session({ secret: 'keyboard cat' }));
-  app.use(passport.initialize());
-  app.use(passport.session());
-  app.use(app.router);
-});
 
 // development only
 if ('development' == app.get('env')) {
