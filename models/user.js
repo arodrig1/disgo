@@ -49,7 +49,7 @@ var User = function() {
         _model.findOne({'username' : username}, function(err, user){
             if(err) return done(err);
             if(!user) return done(null, false, { message : 'Incorrect username.' });
-            console.log("RETRIEVED SALT: " + user.salt);
+            //console.log("RETRIEVED SALT: " + user.salt);
             hash(password, Buffer(user.salt, 'base64'), function(err, hash){
                 if(err) return done(err);
                 hash = Buffer(hash, 'binary').toString('base64');
