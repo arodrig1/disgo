@@ -11,41 +11,13 @@ var mongoose = require('mongoose');
 var handlebars = require('express3-handlebars');
 var partials = require('express-partials');
 
-var passport = require('passport')
-  , LocalStrategy = require('passport-local').Strategy;
-
-passport.serializeUser(function(user, done) {
-  done(null, user.id);
-});
-
-passport.deserializeUser(function(id, done) {
-  findById(id, function (err, user) {
-    if (err) done(err);
-    done(null, user);
-  });
-});
-
-passport.use(new LocalStrategy(
-  function(username, password, done) {
-    User.findOne({ username: username }, function(err, user) {
-      if (err) { return done(err); }
-      if (!user) {
-        return done(null, false, { message: 'Incorrect username.' });
-      }
-
-      hash(password, user.salt, function (err, hash) {
-        if (err) { return done(err); }
-        if (hash == user.hash) return done(null, user);
-        done(null, false, { message: 'Incorrect password.' });
-      });
-    });
-  }
-));
+var passport = require('passport');
+require('./config/passport')(passport);
 
 var index = require('./routes/index');
 // Example route
 // var user = require('./routes/user');
-var login = require('./routes/login');
+var authentication = require('./routes/authentication');
 var rider = require('./routes/rider');
 var driver = require('./routes/driver');
 var coordinator = require('./routes/coordinator');
@@ -65,7 +37,7 @@ app.configure(function() {
 });
 
 var MONGO = {
-    local: 'mongodb://localhost/disgoDB', 
+    uri: process.env.MONGOHQ_URL || 'mongodb://localhost/disgoDB',
     options: {
         server:{
             auto_reconnect: true,
@@ -81,7 +53,7 @@ var MONGO = {
     }
 }
 
-mongoose.connect(MONGO.local, MONGO.options);
+mongoose.connect(MONGO.uri, MONGO.options);
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -105,12 +77,21 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', index.view);
-app.get('/login', login.view);
+app.get('/login', authentication.login);
 app.post('/login',
   passport.authenticate('local', { successRedirect: '/',
                                    failureRedirect: '/login',
-                                   failureFlash: true })
+                                   failureFlash: false })
 );
+app.get('/signup', authentication.signup);
+app.post('/signup', passport.authenticate('local-signup', {
+    successRedirect : '/rider/home',
+    failureRedirect : '/signup',
+    failureFlash : true
+  }));
+app.get('/logout', authentication.logout);
+//app.get('/admin', pass.ensureAuthenticated, pass.ensureAdmin(), user_routes.admin);
+
 
 app.get('/about', index.about);
 app.get('/help', index.help);

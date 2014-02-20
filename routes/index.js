@@ -1,8 +1,5 @@
-var data = require("../data.json");
-
 exports.view = function(req, res){
-  // @TODO: Check for logged in user. If logged in, redirect to appropriate home page.
-  res.render('index', data);
+  res.render('index', { user: req.user });
 };
 
 exports.about = function(req, res){

@@ -1,13 +1,14 @@
-var data = require("../data.json");
+var Ride = require('../models/Ride');
 
 exports.list = function(req, res) {
 	console.log("Loading all rides for req.user from database...");
-	var rides = [];
-	res.render('rides/index', data);
+  var rideID = req.rideID;
+  var ride = Ride.findById(rideID);
+	res.render('rides/index', ride);
 }
 
 exports.request = function(req, res) {
-  	res.render('rides/request', data);
+  	res.render('rides/request');
 };
 
 exports.submit = function(req, res) {
@@ -19,22 +20,23 @@ exports.submit = function(req, res) {
   		"time": "4:00pm"
   	}
   	data["rides"].push(newRide);
-  	res.render('rider/home', data);
+  	res.render('rider/home');
 };
 
 exports.review = function(req, res) {
 	console.log("Fetching ride to review from database...");
-  	res.render('rides/review', data);
+  	res.render('rides/review');
 };
 
 exports.approve = function(req, res) {
 	console.log("Approving ride in database...");
   	//req.session.returnTo = request.path;
-  	res.redirect('/coordinator/home', data);
+  	res.redirect('/coordinator/home');
 };
 
 exports.edit = function(req, res) {
-	console.log("Fetching ride to review from database...");
-  	res.render('rides/edit', data);
+  var rideID = req.rideID;
+  var ride = Ride.findById(rideID);
+  res.render('rides/edit', ride);
 };
 

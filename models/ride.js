@@ -13,7 +13,6 @@ var Ride = function() {
 
     var _model = mongoose.model('Ride', RideSchema);
 
-
     return {
         schema: RideSchema
     };
