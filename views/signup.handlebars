@@ -4,20 +4,17 @@
 	<title>User Signup</title>
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
-	<style>
-		body 		{ padding-top:80px; }
-	</style>
 </head>
 <body>
 <div class="container">
 
 <div class="col-sm-6 col-sm-offset-3">
-	<h1><span class="fa fa-sign-in"></span> Signup</h1>
+	<h1><span class="fa fa-sign-in"></span>Sign Up</h1>
 
 	<!-- show any messages that come back with authentication -->
-	<% if (message.length > 0) { %>
-		<div class="alert alert-danger"><%= message %></div>
-	<% } %>
+	{{#if message}}
+		<div class="alert alert-danger">{{message}}</div>
+	{{/if}}
 
 	<form action="/signup" method="post">
 		<div class="form-group">
@@ -31,8 +28,9 @@
 		<div class="form-group">
 			<label>Type of user</label>
 			<select name="type">
-				<option value=0>Rider</option>
+				<option value=0>Driver</option>
 				<option value=1>Rider</option>
+				<option value=2>Coordinator</option>
 			</select>
 		</div>
 

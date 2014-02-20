@@ -81,13 +81,13 @@ app.get('/login', authentication.login);
 app.post('/login',
   passport.authenticate('local', { successRedirect: '/',
                                    failureRedirect: '/login',
-                                   failureFlash: false })
+                                   failureFlash: "Login failed!" })
 );
 app.get('/signup', authentication.signup);
 app.post('/signup', passport.authenticate('local-signup', {
     successRedirect : '/rider/home',
     failureRedirect : '/signup',
-    failureFlash : true
+    failureFlash : "Signup failed!"
   }));
 app.get('/logout', authentication.logout);
 //app.get('/admin', pass.ensureAuthenticated, pass.ensureAdmin(), user_routes.admin);

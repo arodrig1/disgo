@@ -1,49 +1,60 @@
+var hash = require('../hash');
+var Crypto = require('crypto');
+
 var User = function() {
     var mongoose = require('mongoose'),
         Schema = mongoose.Schema,
         _ObjectId = mongoose.Types.ObjectId;
     
     var UserSchema = new Schema({
-        id: { type: Number, required: true, unique: true },
         type: { type: Number, required: true },//0 = driver, 1 = rider, 2 = coordinator
         username: { type: String, required: true, unique: true },
-        userId: { type: Number, required: true }, //the id of the specific user within that table (may not need)
+        //userId: { type: Number, required: true }, //the id of the specific user within that table (may not need)
         salt: String,
         hash: String
     });
 
-    UserSchema.statics.findOne = function(username) {
-        this.findOne({ username: username}, function(err, user) {
-            if (err) return err;
-            return user;
-        })
+    var _findById = function(id, callback) {
+        _model.findById(id).exec(callback);
     }
 
-    UserSchema.statics.signup = function(username, password, done){
-        var User = this;
-        hash(password, function(err, salt, hash){
-            if(err) throw err;
-            // if (err) return done(err);
-            User.create({
-                username : username,
-                salt : salt,
-                hash : hash
-            }, function(err, user){
+    var _findOne = function(username, done, callback) {
+        _model.findOne({ username: username }).exec(callback);
+    };
+
+    var _create = function(username, password, type, done){
+        try {
+            var salt = Crypto.randomBytes(256);
+        } catch (ex) {
+            console.log(ex);
+        }
+        hash(password, salt, function(err, hash) {
+                //console.log(username);
+                //console.log("CREATED SALT: " + Buffer(salt, 'binary').toString('base64'));
+                //console.log("CREATED HASH: " + Buffer(hash, 'binary').toString('base64'));
                 if(err) throw err;
-                done(null, user);
-            });
+                _model.create({
+                        'username' : username,
+                        'salt' : Buffer(salt, 'binary').toString('base64'),
+                        'hash' : Buffer(hash, 'binary').toString('base64'),
+                        'type' : type
+                    }, function(err, user) {
+                        if(err) throw err;
+                        done(null, user);
+                    });
         });
     };
 
-    UserSchema.statics.isValidUserPassword = function(username, password, done) {
-        this.findOne({username : username}, function(err, user){
-            // if(err) throw err;
-            console.log(err);
+    var _validatePassword = function(username, password, done) {
+        _model.findOne({'username' : username}, function(err, user){
             if(err) return done(err);
-            console.log("IsValidPass called!");
             if(!user) return done(null, false, { message : 'Incorrect username.' });
-            hash(password, user.salt, function(err, hash){
+            console.log("RETRIEVED SALT: " + user.salt);
+            hash(password, Buffer(user.salt, 'base64'), function(err, hash){
                 if(err) return done(err);
+                hash = Buffer(hash, 'binary').toString('base64');
+                //console.log("RETRIEVED HASH: " + user.hash);
+                //console.log("CALCULATED HASH: " + hash);                
                 if(hash == user.hash) return done(null, user);
                 done(null, false, {
                     message : 'Incorrect password'
@@ -55,7 +66,12 @@ var User = function() {
     var _model = mongoose.model('User', UserSchema);
 
     return {
-        schema: UserSchema
+        schema: UserSchema,
+        model: _model,
+        findById: _findById,
+        findOne: _findOne,
+        create: _create,
+        validatePassword: _validatePassword
     };
 }();
 

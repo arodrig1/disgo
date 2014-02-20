@@ -1,16 +1,14 @@
-var mongoose = require('mongoose'),
-Coordinator = require('../models/coordinator.js'),
-Driver = require('../models/driver.js'),
-Rider = require('../models/rider.js'),
-Ride = require('../models/ride.js'),
-User = require('../models/user.js'),
-ObjectId = mongoose.Types.ObjectId;
+var mongoose = require('mongoose');
+//var Coordinator = require('../models/coordinator.js');
+//var Driver = require('../models/driver.js');
+//var Rider = require('../models/rider.js');
+//var Ride = require('../models/ride.js');
+//var User = require('../models/user.js');
+//var ObjectId = mongoose.Types.ObjectId;
 
-var _home = function(req, res){
-	console.log("Loading user's rides from database...");
-
+var _home = function(req, res) {
 	var rides = [];
-  	res.render('rider/home', data);
+  	res.render('rider/home');
 }
 
 var _findById = function(req, res) {

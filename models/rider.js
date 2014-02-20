@@ -7,7 +7,7 @@ var Rider = function() {
     var RiderSchema = new Schema({
         name: { type: String, required: true },
         username: { type: String, required: true },
-        rides: [{ type: ObjectId, ref: 'Ride' }]
+        rides: [{ type: _ObjectId, ref: 'Ride' }]
     });
 
     var _findById = function (riderId, callback) {

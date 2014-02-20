@@ -12,9 +12,9 @@ mongoose.connect(database_uri);
 
 // Step 1: load the JSON data
 var users_json = require('./users.json');
-console.log(User.schema);
+
 // Step 2: Remove all existing documents
-User.schema
+User.model
   .find()
   .remove()
   .exec(onceClear); // callback to continue at

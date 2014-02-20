@@ -10,7 +10,7 @@ var crypto = require('crypto');
  * Bytesize.
  */
 
-var len = 128;
+var len = 256;
 
 /**
  * Iterations. ~300ms
@@ -29,14 +29,15 @@ var iterations = 12000;
  */
 
 module.exports = function (pwd, salt, fn) {
+  var passBuf = new Buffer(pwd.toString());
   if (3 == arguments.length) {
-    crypto.pbkdf2(pwd, salt, iterations, len, fn);
+    crypto.pbkdf2(passBuf, salt, iterations, len, fn);
   } else {
     fn = salt;
     crypto.randomBytes(len, function(err, salt){
       if (err) return fn(err);
-      salt = salt.toString('base64');
-      crypto.pbkdf2(pwd, salt, iterations, len, function(err, hash){
+      salt = crypto.randomBytes(256);
+      crypto.pbkdf2(passBuf, salt, iterations, len, function(err, hash){
         if (err) return fn(err);
         fn(null, salt, hash);
       });
