@@ -1,4 +1,4 @@
-var Ride = require('../models/Ride');
+var Ride = require('../models/rides.js');
 
 exports.list = function(req, res) {
 	console.log("Loading all rides for req.user from database...");
