@@ -16,7 +16,7 @@ var _view = function(req, res){
   		res.render('driver/home');
   	}
   }
-  res.render('index');
+  else res.render('index');
 }
 
 var _about = function(req, res){
