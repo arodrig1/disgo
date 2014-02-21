@@ -4,7 +4,7 @@ var Ride = function() {
         _ObjectId = mongoose.Types.ObjectId,
         Driver = require('./driver.js'),
         Rider = require('./rider.js');
-    
+
     var RideSchema = new Schema({
         from: { type: String, required: true },
         to: { type: String, required: true },
