@@ -29,7 +29,7 @@ var _submit = function(req, res) {
       time: req.body.timee
     };
     User.saveRide(req.user, newRide, function(){});
-    res.render('rider/home');
+    res.redirect('rider/home');
 }
 
 var _review = function(req, res) {
