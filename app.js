@@ -107,17 +107,17 @@ app.get('/rider/home', ensureAuthenticated, rider.home);
 //app.get('/rider/addRide', rider.addRide);
 //app.get('/rider/editRide/:id', rider.editRide);
 
-app.get('/driver/home', ensureAuthenticated,, driver.home);
-app.get('/driver/calendar', ensureAuthenticated,, driver.calendar);
+app.get('/driver/home', ensureAuthenticated, driver.home);
+app.get('/driver/calendar', ensureAuthenticated, driver.calendar);
 
-app.get('/coordinator/home', ensureAuthenticated,, coordinator.home);
+app.get('/coordinator/home', ensureAuthenticated, coordinator.home);
 
-app.get('/rides', ensureAuthenticated,, rides.list);
-app.get('/rides/request', ensureAuthenticated,, rides.request);
-app.post('/rides/submit', ensureAuthenticated,, rides.submit);
-app.get('/rides/:id/review', ensureAuthenticated,, rides.review);
-app.post('/rides/:id/approve', ensureAuthenticated,, rides.approve);
-app.get('/rides/:id/edit', ensureAuthenticated,, rides.edit);
+app.get('/rides', ensureAuthenticated, rides.list);
+app.get('/rides/request', ensureAuthenticated, rides.request);
+app.post('/rides/submit', ensureAuthenticated, rides.submit);
+app.get('/rides/:id/review', ensureAuthenticated, rides.review);
+app.post('/rides/:id/approve', ensureAuthenticated, rides.approve);
+app.get('/rides/:id/edit', ensureAuthenticated, rides.edit);
 
 
 http.createServer(app).listen(app.get('port'), function(){
