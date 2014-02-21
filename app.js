@@ -64,6 +64,7 @@ app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded());
+//app.use(require('connect-multipart')())
 app.use(express.methodOverride());
 app.use(express.cookieParser('Intro HCI secret key'));
 app.use(express.session());
@@ -97,6 +98,8 @@ app.get('/about', index.about);
 app.get('/help', index.help);
 
 app.get('/rider/home', rider.home);
+//app.get('/rider/addRide', rider.addRide);
+//app.get('/rider/editRide/:id', rider.editRide);
 
 app.get('/driver/home', driver.home);
 app.get('/driver/calendar', driver.calendar);
