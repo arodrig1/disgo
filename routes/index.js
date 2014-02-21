@@ -7,16 +7,16 @@ User = require('../models/user.js'),
 ObjectId = mongoose.Types.ObjectId;
 
 var _view = function(req, res){
-  // @TODO: Check for logged in user. If logged in, redirect to appropriate home page.
   if (req.user) {
   	var type = req.user.type;
-  	if (type == 1)
+  	if (type == 1) {
   		res.render('rider/home');
-  	else if (type == 0)
+  	}
+  	else if (type == 0) {
   		res.render('driver/home');
-  	else
-  		res.render('index');
-  }  
+  	}
+  }
+  res.render('index');
 }
 
 var _about = function(req, res){
