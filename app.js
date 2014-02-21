@@ -56,7 +56,7 @@ var MONGO = {
 mongoose.connect(MONGO.uri, MONGO.options);
 
 // all environments
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 3030);
 app.set('views', path.join(__dirname, 'views'));
 app.engine('handlebars', handlebars());
 app.set('view engine', 'handlebars');
@@ -86,7 +86,7 @@ app.post('/login',
 );
 app.get('/signup', authentication.signup);
 app.post('/signup', passport.authenticate('local-signup', {
-    successRedirect : '/rider/home',
+    successRedirect : '/',
     failureRedirect : '/signup',
     failureFlash : "Signup failed!"
   }));

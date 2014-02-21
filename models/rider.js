@@ -6,12 +6,16 @@ var Rider = function() {
     
     var RiderSchema = new Schema({
         name: { type: String, required: true },
-        username: { type: String, required: true },
-        rides: [{ type: _ObjectId, ref: 'Ride' }]
+        username: { type: String, required: true }//,
+        //rides: [{ type: _ObjectId, ref: 'Ride' }]
     });
 
     var _findById = function (riderId, callback) {
-        _model.findById(new ObjId(riderId)).populate('name username rides').exec(callback);
+        _model.findById(new _ObjectId(riderId)).populate('name username rides').exec(callback);
+    }
+
+    var _findByUsername = function (riderUsername, callback) {
+        _model.find({ username: riderUsername }).populate('name username'/* rides*/).exec(callback);
     }
 
     var _findAll = function(callback) {
@@ -29,6 +33,7 @@ var Rider = function() {
         model: _model,
         findById: _findById,
         findAll: _findAll,
+        findByUsername: _findByUsername,
         save: _save
     };
 }();
