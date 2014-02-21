@@ -9,15 +9,27 @@ var Ride = function() {
         from: { type: String, required: true },
         to: { type: String, required: true },
         date: { type: Date, required: true },
-        time: { type: String, required: true }//,
+        time: { type: String, required: true },
         //driver: { type: _ObjectId, ref: 'Driver' },
-        //rider: { type: _ObjectId, ref: 'Rider' }
+        //rider: { type: _ObjectId, ref: 'Rider' },
+        username: {type: String},
+
     });
 
     var _model = mongoose.model('Ride', RideSchema);
 
+    var _save = function (rideJSON, callback) {
+        _model.create(rideJSON, callback);
+    }
+
+    var _findByUsername = function (userUsername, callback) {
+        _model.find({ username: userUsername }).exec(callback);
+    }
+
     return {
-        schema: RideSchema
+        schema: RideSchema,
+        save: _save,
+        findByUsername: _findByUsername
     };
 }();
 

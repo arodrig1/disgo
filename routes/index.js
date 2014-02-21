@@ -2,6 +2,8 @@ var mongoose = require('mongoose'),
 Coordinator = require('../models/coordinator.js'),
 Driver = require('../models/driver.js'),
 Rider = require('../models/rider.js'),
+RiderRoute = require('./rider.js'),
+DriverRoute = require('./driver.js'),
 Ride = require('../models/ride.js'),
 User = require('../models/user.js'),
 ObjectId = mongoose.Types.ObjectId;
@@ -10,13 +12,15 @@ var _view = function(req, res){
   if (req.user) {
   	var type = req.user.type;
   	if (type == 1) {
-  		res.render('rider/home');
+  		RiderRoute.home(req, res);
   	}
   	else if (type == 0) {
-  		res.render('driver/home');
+  		DriverRoute.home(req, res);
   	}
   }
-  res.render('index');
+  else {
+  	res.render('index');
+  }
 }
 
 var _about = function(req, res){

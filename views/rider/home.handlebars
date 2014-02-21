@@ -15,16 +15,19 @@
   <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
 </head>
 <body>
-  <p>username:</p>
-  <p>{{username}}</p>
 
-  <!--
   {{> navbar}}
   <div><a class="btn btn-primary btn-block" href="/rides/request">Request a Ride</a>
   </div>
     <div class="container">
+    <!--{{#each rider}}-->
+        <p>{{username}}</p>
+
     {{#each rides}}
+    <p>{{rides}}</p>
+    <p>RIDE</p>
     <div class="thumbnail" id="ride{{id}}">
+      <h5 class="h5-center"> {{date}} </h5>
       <h5 class="h5-center"> {{time}} </h5>
       <ul>
         <li>To: {{to}}</li>
@@ -33,8 +36,9 @@
       </ul>
     </div>
     {{/each}}
+    <!--{{/each}}-->
   </div>
-
+  <!--
   <div>
     <div class="w-slider" data-animation="slide" data-duration="500" data-infinite="1">
       <div class="w-slider-mask">
