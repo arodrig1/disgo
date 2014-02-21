@@ -10,12 +10,16 @@ var User = function() {
         type: { type: Number, required: true },//0 = driver, 1 = rider, 2 = coordinator
         username: { type: String, required: true, unique: true },
         //userId: { type: Number, required: true }, //the id of the specific user within that table (may not need)
-        salt: String,
-        hash: String
+        salt: { type: String},
+        hash: { type: String}
     });
 
     var _findById = function(id, callback) {
         _model.findById(id).exec(callback);
+    }
+
+    var _findByUsername = function (userUsername, callback) {
+        _model.find({ username: userUsername }).exec(callback);
     }
 
     var _findOne = function(username, done, callback) {
@@ -33,6 +37,7 @@ var User = function() {
                 //console.log("CREATED SALT: " + Buffer(salt, 'binary').toString('base64'));
                 //console.log("CREATED HASH: " + Buffer(hash, 'binary').toString('base64'));
                 if(err) throw err;
+                console.log("creating the user now");
                 _model.create({
                         'username' : username,
                         'salt' : Buffer(salt, 'binary').toString('base64'),
@@ -69,6 +74,7 @@ var User = function() {
         schema: UserSchema,
         model: _model,
         findById: _findById,
+        findByUsername: _findByUsername,
         findOne: _findOne,
         create: _create,
         validatePassword: _validatePassword

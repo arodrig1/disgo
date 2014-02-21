@@ -56,7 +56,7 @@ var MONGO = {
 mongoose.connect(MONGO.uri, MONGO.options);
 
 // all environments
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 3030);
 app.set('views', path.join(__dirname, 'views'));
 app.engine('handlebars', handlebars());
 app.set('view engine', 'handlebars');
@@ -64,6 +64,7 @@ app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded());
+//app.use(require('connect-multipart')())
 app.use(express.methodOverride());
 app.use(express.cookieParser('Intro HCI secret key'));
 app.use(express.session());
@@ -91,7 +92,7 @@ app.post('/login',
 );
 app.get('/signup', authentication.signup);
 app.post('/signup', passport.authenticate('local-signup', {
-    successRedirect : '/rider/home',
+    successRedirect : '/',
     failureRedirect : '/signup',
     failureFlash : "Signup failed!"
   }));
@@ -103,6 +104,8 @@ app.get('/about', index.about);
 app.get('/help', index.help);
 
 app.get('/rider/home', ensureAuthenticated, rider.home);
+//app.get('/rider/addRide', rider.addRide);
+//app.get('/rider/editRide/:id', rider.editRide);
 
 app.get('/driver/home', ensureAuthenticated,, driver.home);
 app.get('/driver/calendar', ensureAuthenticated,, driver.calendar);

@@ -1,5 +1,6 @@
 var LocalStrategy = require('passport-local').Strategy;
 var User = require('../models/user.js');
+var Rider = require('../models/rider.js');
 
 module.exports = function(passport) {
   passport.serializeUser(function(user, done) {
@@ -24,6 +25,11 @@ module.exports = function(passport) {
         if (user) return done(null, false, "That username is already taken");
         else {
           User.create(username, password, 1, done);
+          // Rider.save({name: username, username: username}, function(err, doc) {
+          //   console.log(doc);
+          //   if (err)
+          //     throw err;
+          //   });
         }
       });
     }));

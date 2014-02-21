@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <title>DisGo - Rider Home</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
   <link rel="stylesheet" type="text/css" href="/css/normalize.css">
   <link rel="stylesheet" type="text/css" href="/css/webflow.css">
   <link rel="stylesheet" type="text/css" href="/css/disgo.webflow.css">
@@ -14,13 +15,30 @@
   <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
 </head>
 <body>
+  <p>username:</p>
+  <p>{{username}}</p>
+
+  <!--
   {{> navbar}}
-  <div><a class="button" href="/rides/request">Request a Ride</a>
+  <div><a class="btn btn-primary btn-block" href="/rides/request">Request a Ride</a>
   </div>
+    <div class="container">
+    {{#each rides}}
+    <div class="thumbnail" id="ride{{id}}">
+      <h5 class="h5-center"> {{time}} </h5>
+      <ul>
+        <li>To: {{to}}</li>
+        <li>From: {{from}}</li>
+        <a href="/rides/edit">Edit</a>
+      </ul>
+    </div>
+    {{/each}}
+  </div>
+
   <div>
     <div class="w-slider" data-animation="slide" data-duration="500" data-infinite="1">
       <div class="w-slider-mask">
-        <!--<div class="w-slide">
+        <div class="w-slide">
           <ul>
             <li>
               <div class="w-container"></div>
@@ -34,7 +52,7 @@
             <li></li>
             <li></li>
           </ul>
-        </div> -->
+        </div> 
         {{#each rides}}
         <div class="w-slide" id="ride{{id}}">
           <ul>
@@ -55,7 +73,7 @@
       <div class="w-slider-nav w-round"></div>
     </div>
   </div>
-  <div></div>
+  <div></div> -->
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <script type="text/javascript" src="/js/webflow.js"></script>
 </body>

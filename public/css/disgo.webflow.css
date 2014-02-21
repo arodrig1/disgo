@@ -46,8 +46,8 @@ p {
 .button {
   display: inline-block;
   padding: 4px 15px;
-  background-color: black;
-  color: white;
+  background-color: #5CB8E6;
+  color: #FFFFFF;
   text-align: center;
   text-decoration: none;
 }

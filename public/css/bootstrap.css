@@ -489,6 +489,11 @@ h5,
   font-size: 14px;
 }
 
+.h5-center {
+  font-size: 14px;
+  text-align: center;
+}
+
 h6,
 .h6 {
   font-size: 12px;
@@ -782,10 +787,20 @@ pre code {
 }
 
 .container {
+  padding-top: 5px;
   padding-right: 15px;
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
+}
+
+.container-center {
+  padding-top: 15px;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
 }
 
 .container:before,
@@ -5268,7 +5283,7 @@ a.list-group-item.active > .badge,
   padding: 4px;
   margin-bottom: 20px;
   line-height: 1.428571429;
-  background-color: #ffffff;
+  background-color: #EFEFEF;
   border: 1px solid #dddddd;
   border-radius: 4px;
   -webkit-transition: all 0.2s ease-in-out;
