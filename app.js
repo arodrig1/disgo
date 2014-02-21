@@ -76,6 +76,12 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
+function ensureAuthenticated(req, res, next) {
+  console.log(req.isAuthenticated());
+  if (req.isAuthenticated()) { return next(); }
+  res.redirect('/login');
+}
+
 app.get('/', index.view);
 app.get('/login', authentication.login);
 app.post('/login',
@@ -96,19 +102,19 @@ app.get('/logout', authentication.logout);
 app.get('/about', index.about);
 app.get('/help', index.help);
 
-app.get('/rider/home', rider.home);
+app.get('/rider/home', ensureAuthenticated, rider.home);
 
-app.get('/driver/home', driver.home);
-app.get('/driver/calendar', driver.calendar);
+app.get('/driver/home', ensureAuthenticated,, driver.home);
+app.get('/driver/calendar', ensureAuthenticated,, driver.calendar);
 
-app.get('/coordinator/home', coordinator.home);
+app.get('/coordinator/home', ensureAuthenticated,, coordinator.home);
 
-app.get('/rides', rides.list);
-app.get('/rides/request', rides.request);
-app.post('/rides/submit', rides.submit);
-app.get('/rides/:id/review', rides.review);
-app.post('/rides/:id/approve', rides.approve);
-app.get('/rides/:id/edit', rides.edit);
+app.get('/rides', ensureAuthenticated,, rides.list);
+app.get('/rides/request', ensureAuthenticated,, rides.request);
+app.post('/rides/submit', ensureAuthenticated,, rides.submit);
+app.get('/rides/:id/review', ensureAuthenticated,, rides.review);
+app.post('/rides/:id/approve', ensureAuthenticated,, rides.approve);
+app.get('/rides/:id/edit', ensureAuthenticated,, rides.edit);
 
 
 http.createServer(app).listen(app.get('port'), function(){
