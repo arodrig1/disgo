@@ -18,9 +18,7 @@ var _view = function(req, res){
   		DriverRoute.home(req, res);
   	}
   }
-  else {
-  	res.render('index');
-  }
+  else res.render('index');
 }
 
 var _about = function(req, res){
