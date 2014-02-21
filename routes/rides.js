@@ -20,6 +20,15 @@ var _request = function(req, res) {
 var _submit = function(req, res) {
   console.log("Logging requested ride in database...");
     //req.session.returnTo = request.path;
+    console.log("SUBMIT REQUEST:" + req.body.dropdown1);
+    var newRide = {
+      username: req.user.username,
+      to: req.body.dropdown2,
+      from: req.body.dropdown1,
+      date: req.body.date,
+      time: req.body.timee
+    };
+    User.saveRide(req.user, newRide, function(){});
     res.render('rider/home');
 }
 

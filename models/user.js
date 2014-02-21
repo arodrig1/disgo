@@ -1,5 +1,6 @@
 var hash = require('../hash');
 var Crypto = require('crypto');
+var Ride = require('../models/ride.js');
 
 var User = function() {
     var mongoose = require('mongoose'),
@@ -11,7 +12,10 @@ var User = function() {
         username: { type: String, required: true, unique: true },
         //userId: { type: Number, required: true }, //the id of the specific user within that table (may not need)
         salt: { type: String},
-        hash: { type: String}
+        hash: { type: String},
+        name: { type: String},
+        rides: [{ type: _ObjectId, ref: 'Ride' }]
+
     });
 
     var _findById = function(id, callback) {
@@ -37,14 +41,13 @@ var User = function() {
                 //console.log("CREATED SALT: " + Buffer(salt, 'binary').toString('base64'));
                 //console.log("CREATED HASH: " + Buffer(hash, 'binary').toString('base64'));
                 if(err) throw err;
-                console.log("creating the user now");
                 _model.create({
                         'username' : username,
                         'salt' : Buffer(salt, 'binary').toString('base64'),
                         'hash' : Buffer(hash, 'binary').toString('base64'),
                         'type' : type
                     }, function(err, user) {
-                        if(err) throw err;
+                        if(err) {throw err;}
                         done(null, user);
                     });
         });
@@ -68,6 +71,17 @@ var User = function() {
         });
     };
 
+    var _saveRide = function (user, rideJSON, callback) {
+        Ride.save(rideJSON, function(err, riderDocs) {
+            if(err) {
+                console.log(err);
+                throw err;
+            }
+            console.log(riderDocs);
+            _model.update({_id: user.id}, {$push: { rides: riderDocs }},{upsert:true}, callback);
+        });
+    }
+
     var _model = mongoose.model('User', UserSchema);
 
     return {
@@ -77,7 +91,8 @@ var User = function() {
         findByUsername: _findByUsername,
         findOne: _findOne,
         create: _create,
-        validatePassword: _validatePassword
+        validatePassword: _validatePassword,
+        saveRide: _saveRide
     };
 }();
 
