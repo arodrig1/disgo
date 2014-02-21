@@ -19,7 +19,7 @@ module.exports = function(passport) {
     }));
 
   passport.use('local-signup', new LocalStrategy(
-    function(username, password, type, done) {
+    function(username, password, done) {
       User.findOne(username, done, function(err, user) {
         if (err) return done(err);
         if (user) return done(null, false, "That username is already taken");
