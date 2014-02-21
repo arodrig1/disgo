@@ -24,6 +24,7 @@ var _home = function(req, res) {
             Ride.findByUsername(user.username, function(err, rideDocs) {
             if (err) throw err;
             console.log("RIDES" + rideDocs);
+            //rideDocs = {'username': "divs"};
             res.render('rider/home', {'rides': rideDocs });
         });
 }

@@ -12,72 +12,24 @@
     if (/mobile/i.test(navigator.userAgent)) document.documentElement.className += ' w-mobile';
   </script>
   <link rel="shortcut icon" type="image/x-icon" href="https://y7v4p6k4.ssl.hwcdn.net/placeholder/favicon.ico">
-  <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+
 </head>
 <body>
 
   {{> navbar}}
-  <div><a class="btn btn-primary btn-block" href="/rides/request">Request a Ride</a>
-  </div>
-    <div class="container">
-    <!--{{#each rider}}-->
-        <p>{{username}}</p>
-
-    {{#each rides}}
-    <p>{{rides}}</p>
-    <p>RIDE</p>
+  <div><a class="btn btn-primary btn-block" href="/rides/request">Request a Ride</a></div><br>    
+  <div class="container">
+  {{#each rides}}
     <div class="thumbnail" id="ride{{id}}">
-      <h5 class="h5-center"> {{date}} </h5>
-      <h5 class="h5-center"> {{time}} </h5>
+      <h5 class="h5" align=center> <strong>{{time}}</strong> </h5>
+      <h5 class="h5" align=center> {{date}} </h5>
       <ul>
         <li>To: {{to}}</li>
         <li>From: {{from}}</li>
-        <a href="/rides/edit">Edit</a>
       </ul>
     </div>
-    {{/each}}
-    <!--{{/each}}-->
-  </div>
-  <!--
-  <div>
-    <div class="w-slider" data-animation="slide" data-duration="500" data-infinite="1">
-      <div class="w-slider-mask">
-        <div class="w-slide">
-          <ul>
-            <li>
-              <div class="w-container"></div>
-              <div class="w-container">
-                <div class="w-row">
-                  <div class="w-col w-col-6"></div>
-                  <div class="w-col w-col-6"></div>
-                </div>
-              </div>
-            </li>
-            <li></li>
-            <li></li>
-          </ul>
-        </div> 
-        {{#each rides}}
-        <div class="w-slide" id="ride{{id}}">
-          <ul>
-            <li>{{from}}</li>
-            <li>{{to}}</li>
-            <li>{{time}}</li>
-          </ul>
-          <a href="/rides/1/edit">Edit</a>
-        </div>
-        {{/each}}
-      </div>
-      <div class="w-slider-arrow-left">
-        <div class="w-icon-slider-left"></div>
-      </div>
-      <div class="w-slider-arrow-right">
-        <div class="w-icon-slider-right"></div>
-      </div>
-      <div class="w-slider-nav w-round"></div>
-    </div>
-  </div>
-  <div></div> -->
+   {{/each}}
+   </div>
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <script type="text/javascript" src="/js/webflow.js"></script>
 </body>
