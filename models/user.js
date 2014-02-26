@@ -29,7 +29,7 @@ var User = function() {
         _model.findOne({ username: username }).exec(callback);
     };
 
-    var _create = function(username, password, type, done){
+    var _create = function(name, username, password, type, done){
         try {
             var salt = Crypto.randomBytes(256);
         } catch (ex) {
@@ -38,6 +38,7 @@ var User = function() {
         hash(password, salt, function(err, hash) {
                 if(err) throw err;
                 _model.create({
+                        'Name' : name,
                         'username' : username,
                         'salt' : Buffer(salt, 'binary').toString('base64'),
                         'hash' : Buffer(hash, 'binary').toString('base64'),

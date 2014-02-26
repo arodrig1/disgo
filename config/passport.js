@@ -28,7 +28,7 @@ module.exports = function(passport) {
         if (err) return done(err);
         if (user) return done(null, false, { message: "That username is already taken" });
         else {
-          return User.create(username, password, req.body.type, done);
+          return User.create(req.body.realname, username, password, req.body.type, done);
         }
       });
     }));
