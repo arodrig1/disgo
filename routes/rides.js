@@ -18,10 +18,10 @@ var _request = function(req, res) {
 
 var _submit = function(req, res) {
   var newRide = {
-    driverUsername: "divya2",//CHANGE ME!!!!!!!!!!!!!!!!!!!
+    driverUsername: "bayian",//CHANGE ME!
+    driver: "Bayian",//CHANGE ME!
     riderUsername: req.user.username,
-    driver: "divya2",//CHANGE ME!!!!!!!!!!!!!!!!!!
-    rider: req.user.username,//CHANGE ME TO "Name"
+    rider: req.user.Name,
     to: req.body.dropdown2,
     from: req.body.dropdown1,
     date: req.body.date,
