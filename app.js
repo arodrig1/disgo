@@ -30,9 +30,9 @@ app.configure(function() {
   app.use(express.cookieParser());
   app.use(express.bodyParser());
   app.use(express.session({ secret: 'keyboard cat' }));
-  app.use(flash());
   app.use(passport.initialize());
   app.use(passport.session());
+  app.use(flash());
   app.use(app.router);
 });
 
@@ -72,6 +72,8 @@ app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(partials());
 
+//app.dynamicHelpers({flash: function(req, res) { return req.flash(); }});
+
 // development only
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
@@ -88,13 +90,13 @@ app.get('/login', authentication.login);
 app.post('/login',
   passport.authenticate('local', { successRedirect: '/',
                                    failureRedirect: '/login',
-                                   failureFlash: "Login failed!" })
+                                   failureFlash: true })
 );
 app.get('/signup', authentication.signup);
-app.post('/signup', passport.authenticate('local-signup', {
-    successRedirect : '/',
+app.post('/signup', passport.authenticate('signup', {
+    successRedirect : '/addDetails',
     failureRedirect : '/signup',
-    failureFlash : "Signup failed!"
+    failureFlash: true
   }));
 app.get('/logout', authentication.logout);
 //app.get('/admin', pass.ensureAuthenticated, pass.ensureAdmin(), user_routes.admin);

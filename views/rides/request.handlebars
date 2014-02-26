@@ -21,7 +21,7 @@
   <div class="w-form">
     <form name="wf-form-request-ride-form" action="/rides/submit" method="post" data-name="Request Ride Form">
       <label for="from">From:</label>
-      <select class="w-select" name="dropdown1">
+      <select class="w-select" name="dropdown1" autofocus required>
         <option value="">Select one...</option>
         <option value="Arrillaga Gym East">Arrillaga Gym East</option>
         <option value="Arrillaga Gym West">Arrillaga Gym West</option>
@@ -63,7 +63,7 @@
         <option value="Wilbur Hall">Wilbur Hall</option>
       </select>
       <label for="to">To:</label>
-      <select class="w-select" name="dropdown2">
+      <select class="w-select" name="dropdown2" required>
         <option value="">Select one...</option>
         <option value="">Select one...</option>
         <option value="Arrillaga Gym East">Arrillaga Gym East</option>
@@ -98,7 +98,7 @@
         <option value="Meyer Library">Meyer Library</option>
         <option value="Mirrelees">Mirrelees</option>
         <option value="Munger Graduate Housing">Munger Graduate Housing</option>
-        <option value="Raines Houses">Raines Houses</option>
+        <option value="Raines Houses">Rains Houses</option>
         <option value="Roble Hall">Roble Hall</option>
         <option value="Stern Hall">Stern Hall</option>
         <option value="Tressider Union">Tressider Union</option>
@@ -106,9 +106,9 @@
         <option value="Wilbur Hall">Wilbur Hall</option>
       </select>
       <label for="time">Time:</label>
-      <input type="time" name="timee"></input>
-      <label for="date">Date:</label>
-      <input type="date" name="date"></input>
+      <input type="time" name="ridetime" required></input>
+      <label for="date-local">Date:</label>
+      <input type="date" name="date" required></input>
       <div></div>
       <div></div>
       <input class="w-button" type="submit" value="Cancel" data-wait="Please wait..."></input>

@@ -23,7 +23,7 @@ var Ride = function() {
     }
 
     var _findByUsername = function (userUsername, callback) {
-        _model.find({ username: userUsername }).exec(callback);
+        _model.find({ username: userUsername }).sort({ date: 'asc' }).sort({ time: 'asc' }).exec(callback);
     }
 
     return {

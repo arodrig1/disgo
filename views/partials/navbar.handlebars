@@ -9,4 +9,10 @@
         	</nav>
       	</div>
     </div>
+    {{#if flashAlert}}
+      <div class="alert alert-danger">{{message}}</div>
+    {{/if}}
+    {{#if flashMessage}}
+      <div class="alert alert-danger">{{message}}</div>
+    {{/if}}
 </div>

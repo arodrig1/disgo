@@ -37,9 +37,6 @@ var User = function() {
             console.log(ex);
         }
         hash(password, salt, function(err, hash) {
-                //console.log(username);
-                //console.log("CREATED SALT: " + Buffer(salt, 'binary').toString('base64'));
-                //console.log("CREATED HASH: " + Buffer(hash, 'binary').toString('base64'));
                 if(err) throw err;
                 _model.create({
                         'username' : username,
@@ -54,20 +51,24 @@ var User = function() {
     };
 
     var _validatePassword = function(username, password, done) {
+    //var _validatePassword = function(username, password, callbackFn) {
         _model.findOne({'username' : username}, function(err, user){
             if(err) return done(err);
             if(!user) return done(null, false, { message : 'Incorrect username.' });
-            //console.log("RETRIEVED SALT: " + user.salt);
             hash(password, Buffer(user.salt, 'base64'), function(err, hash){
                 if(err) return done(err);
                 hash = Buffer(hash, 'binary').toString('base64');
-                //console.log("RETRIEVED HASH: " + user.hash);
-                //console.log("CALCULATED HASH: " + hash);                
                 if(hash == user.hash) return done(null, user);
-                done(null, false, {
-                    message : 'Incorrect password'
-                });
+                else return done(null, false, { message : 'Incorrect password' });
             });
+            /*if (err) return callbackFn({ success: false, message: err });
+            if (!user) return callbackFn({ success: false, message : 'Incorrect username.' });
+            hash(password, Buffer(user.salt, 'base64'), function(err, hash) {
+                if (err) return callbackFn({ success: false, message: err });
+                hash = Buffer(hash, 'binary').toString('base64');
+                if(hash == user.hash) return callbackFn({ success: true, message: null });
+                else return callbackFn({ success: false, message: 'Incorrect password' });
+            });*/
         });
     };
 

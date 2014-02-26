@@ -15,21 +15,21 @@ module.exports = function(passport) {
 
   passport.use('local', new LocalStrategy(
     function(username, password, done) {
-      User.validatePassword(username, password, done);
+      return User.validatePassword(username, password, done);
+      /*User.validatePassword(username, password, function(status) {
+        if (status['success']) return done(null, status['user']);
+        else return done(null, false, { message: status['message'] });
+      });*/
     }));
 
-  passport.use('local-signup', new LocalStrategy(
+  passport.use('signup', new LocalStrategy(
     function(username, password, done) {
       User.findOne(username, done, function(err, user) {
+        console.log("DONE: " + done);
         if (err) return done(err);
-        if (user) return done(null, false, "That username is already taken");
+        if (user) return done(null, false, { message: "That username is already taken" });
         else {
-          User.create(username, password, 1, done);
-          // Rider.save({name: username, username: username}, function(err, doc) {
-          //   console.log(doc);
-          //   if (err)
-          //     throw err;
-          //   });
+          return User.create(username, password, 1, done);
         }
       });
     }));

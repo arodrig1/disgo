@@ -15,14 +15,13 @@
 
 </head>
 <body>
-
   {{> navbar}}
   <div><a class="btn btn-primary btn-block" href="/rides/request">Request a Ride</a></div><br>    
   <div class="container">
   {{#each rides}}
     <div class="thumbnail" id="ride{{id}}">
-      <h5 class="h5" align=center> <strong>{{time}}</strong> </h5>
-      <h5 class="h5" align=center> {{date}} </h5>
+      <h5 class="h5" align=center><strong>{{time}}</strong></h5>
+      <h5 class="h5" align=center>{{date}}</h5>
       <ul>
         <li>To: {{to}}</li>
         <li>From: {{from}}</li>

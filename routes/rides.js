@@ -7,7 +7,7 @@ User = require('../models/user.js'),
 ObjectId = mongoose.Types.ObjectId;
 
 var _list = function(req, res) {
-	console.log("Loading all rides for req.user from database...");
+	//console.log("Loading all rides for req.user from database...");
   var rideID = req.rideID;
   var ride = Ride.findById(rideID);
 	res.render('rides/index', ride);
@@ -18,29 +18,26 @@ var _request = function(req, res) {
 }
 
 var _submit = function(req, res) {
-  console.log("Logging requested ride in database...");
-    //req.session.returnTo = request.path;
-    console.log("SUBMIT REQUEST:" + req.body.dropdown1);
-    var newRide = {
-      username: req.user.username,
-      to: req.body.dropdown2,
-      from: req.body.dropdown1,
-      date: req.body.date,
-      time: req.body.timee
-    };
-    User.saveRide(req.user, newRide, function(){});
-    res.redirect('rider/home');
+  var newRide = {
+    username: req.user.username,
+    to: req.body.dropdown2,
+    from: req.body.dropdown1,
+    date: req.body.date,
+    time: req.body.ridetime
+  };
+  User.saveRide(req.user, newRide, function(){});
+  res.redirect('rider/home');
 }
 
 var _review = function(req, res) {
-  console.log("Fetching ride to review from database...");
+  //console.log("Fetching ride to review from database...");
     res.render('rides/review');
 }
 
 var _approve = function(req, res) {
-  console.log("Approving ride in database...");
+  //console.log("Approving ride in database...");
     //req.session.returnTo = request.path;
-    res.redirect('/coordinator/home');
+  res.redirect('/coordinator/home');
 }
 
 var _edit = function(req, res) {
@@ -57,4 +54,3 @@ module.exports = {
     approve: _approve,
     edit: _edit
 }
-
