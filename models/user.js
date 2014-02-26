@@ -13,7 +13,7 @@ var User = function() {
         //userId: { type: Number, required: true }, //the id of the specific user within that table (may not need)
         salt: { type: String},
         hash: { type: String},
-        name: { type: String},
+        Name: { type: String},
         rides: [{ type: _ObjectId, ref: 'Ride' }]
 
     });

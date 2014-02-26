@@ -8,7 +8,7 @@ var ObjectId = mongoose.Types.ObjectId;
 
 var _home = function(req, res) {
     var user = req.user;
-    Ride.findByUsername(user.username, function(err, rides) {
+    Ride.findByRiderUsername(user.username, function(err, rides) {
         if (err) throw err;
         for (var i = 0; i < rides.length; i++) {
             rides[i] = rides[i].toObject();
