@@ -109,7 +109,7 @@ app.get('/rider/home', ensureAuthenticated, rider.home);
 //app.get('/rider/editRide/:id', rider.editRide);
 
 app.get('/driver/home', ensureAuthenticated, driver.home);
-app.get('/driver/calendar', ensureAuthenticated, driver.calendar);
+//app.get('/driver/calendar', ensureAuthenticated, driver.calendar);
 
 app.get('/coordinator/home', ensureAuthenticated, coordinator.home);
 
