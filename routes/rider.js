@@ -7,26 +7,15 @@ var User = require('../models/user.js');
 var ObjectId = mongoose.Types.ObjectId;
 
 var _home = function(req, res) {
-    console.log("Loading user's rides from database...");
     var user = req.user;
-    // User.findByUsername(user.username, function(err, riderDocs) {
-    //     if (err) throw err;
-    //     //res.set('cache-control', 'no-cache');
-    //     //res.set('Content-Type', 'application/json');
-    //     console.log("rider docs: " + riderDocs);
-    //     Ride.findByUsername(user.username, function(err, rideDocs) {
-    //         if (err) throw err;
-    //         console.log("RIDES" + rideDocs);
-    //         res.render('rider/home', { 'rider': riderDocs, 'rides': rideDocs });
-    //     });
-    // });
-
-            Ride.findByUsername(user.username, function(err, rideDocs) {
-            if (err) throw err;
-            console.log("RIDES" + rideDocs);
-            //rideDocs = {'username': "divs"};
-            res.render('rider/home', {'rides': rideDocs });
-        });
+    Ride.findByUsername(user.username, function(err, rides) {
+        if (err) throw err;
+        for (var i = 0; i < rides.length; i++) {
+            rides[i] = rides[i].toObject();
+            rides[i].date = rides[i].date.toDateString().split(" ").slice(0, 4).join(" ");
+        }
+        res.render('rider/home', { 'rides': rides });
+    });
 }
 
 var _addRide = function(req, res) {
