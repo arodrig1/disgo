@@ -15,7 +15,6 @@ var User = function() {
         hash: { type: String},
         name: { type: String},
         rides: [{ type: _ObjectId, ref: 'Ride' }]
-
     });
 
     var _findById = function(id, callback) {

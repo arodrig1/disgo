@@ -22,14 +22,13 @@ module.exports = function(passport) {
       });*/
     }));
 
-  passport.use('signup', new LocalStrategy(
-    function(username, password, done) {
+  passport.use('signup', new LocalStrategy({ passReqToCallback: true },
+    function(req, username, password, done) {
       User.findOne(username, done, function(err, user) {
-        console.log("DONE: " + done);
         if (err) return done(err);
         if (user) return done(null, false, { message: "That username is already taken" });
         else {
-          return User.create(username, password, 1, done);
+          return User.create(username, password, req.body.type, done);
         }
       });
     }));

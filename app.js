@@ -2,14 +2,13 @@
 /**
  * Module dependencies.
  */
-
-var flash = require('connect-flash');
 var express = require('express');
 var http = require('http');
 var path = require('path');
 var mongoose = require('mongoose');
 var handlebars = require('express3-handlebars');
 var partials = require('express-partials');
+var flash = require('connect-flash');
 
 var passport = require('passport');
 require('./config/passport')(passport);
@@ -94,7 +93,7 @@ app.post('/login',
 );
 app.get('/signup', authentication.signup);
 app.post('/signup', passport.authenticate('signup', {
-    successRedirect : '/addDetails',
+    successRedirect : '/',
     failureRedirect : '/signup',
     failureFlash: true
   }));
