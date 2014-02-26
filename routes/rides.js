@@ -7,7 +7,6 @@ User = require('../models/user.js'),
 ObjectId = mongoose.Types.ObjectId;
 
 var _list = function(req, res) {
-	//console.log("Loading all rides for req.user from database...");
   var rideID = req.rideID;
   var ride = Ride.findById(rideID);
 	res.render('rides/index', ride);
@@ -19,7 +18,10 @@ var _request = function(req, res) {
 
 var _submit = function(req, res) {
   var newRide = {
-    username: req.user.username,
+    driverUsername: "divya2",//CHANGE ME!!!!!!!!!!!!!!!!!!!
+    riderUsername: req.user.username,
+    driver: "divya2",//CHANGE ME!!!!!!!!!!!!!!!!!!
+    rider: req.user.username,//CHANGE ME TO "Name"
     to: req.body.dropdown2,
     from: req.body.dropdown1,
     date: req.body.date,

@@ -12,24 +12,32 @@ var Ride = function() {
         time: { type: String, required: true },
         //driver: { type: _ObjectId, ref: 'Driver' },
         //rider: { type: _ObjectId, ref: 'Rider' },
-        username: {type: String},
-
+        driverUsername: {type: String},
+        riderUsername: {type: String, required: true},
+        driver: {type: String},
+        rider: {type: String, required: true}
     });
 
     var _model = mongoose.model('Ride', RideSchema);
 
     var _save = function (rideJSON, callback) {
+        //ASSIGN DRIVER AND DRIVER USERNAME
         _model.create(rideJSON, callback);
     }
 
-    var _findByUsername = function (userUsername, callback) {
-        _model.find({ username: userUsername }).sort({ date: 'asc' }).sort({ time: 'asc' }).exec(callback);
+    var _findByDriverUsername = function (driver, callback) {
+        _model.find({ driverUsername: driver }).sort({ date: 'asc' }).sort({ time: 'asc' }).exec(callback);
+    }
+
+    var _findByRiderUsername = function (rider, callback) {
+        _model.find({ riderUsername: rider }).sort({ date: 'asc' }).sort({ time: 'asc' }).exec(callback);
     }
 
     return {
         schema: RideSchema,
         save: _save,
-        findByUsername: _findByUsername
+        findByDriverUsername: _findByDriverUsername,
+        findByRiderUsername: _findByRiderUsername
     };
 }();
 
