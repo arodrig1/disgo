@@ -48,11 +48,16 @@ var _edit = function(req, res) {
   res.render('rides/edit', ride);
 }
 
+var _deleteRide = function(req, res) {
+
+}
+
 module.exports = {
     list: _list,
     request: _request,
     submit: _submit,
     review: _review,
     approve: _approve,
-    edit: _edit
+    edit: _edit,
+    deleteRide: _deleteRide
 }

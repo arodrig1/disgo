@@ -118,7 +118,8 @@ app.get('/rides/request', ensureAuthenticated, rides.request);
 app.post('/rides/submit', ensureAuthenticated, rides.submit);
 app.get('/rides/:id/review', ensureAuthenticated, rides.review);
 app.post('/rides/:id/approve', ensureAuthenticated, rides.approve);
-app.get('/rides/:id/edit', ensureAuthenticated, rides.edit);
+app.get('/rides/edit/:id', ensureAuthenticated, rides.edit);
+app.get('/rides/delete/:id', ensureAuthenticated, rides.edit)
 
 
 http.createServer(app).listen(app.get('port'), function(){
