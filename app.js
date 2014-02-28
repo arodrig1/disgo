@@ -1,21 +1,16 @@
-
 /**
  * Module dependencies.
  */
+var flash = require('connect-flash');
 var express = require('express');
+var passport = require('passport');
 var http = require('http');
 var path = require('path');
 var mongoose = require('mongoose');
 var handlebars = require('express3-handlebars');
 var partials = require('express-partials');
-var flash = require('connect-flash');
-
-var passport = require('passport');
-require('./config/passport')(passport);
 
 var index = require('./routes/index');
-// Example route
-// var user = require('./routes/user');
 var authentication = require('./routes/authentication');
 var rider = require('./routes/rider');
 var driver = require('./routes/driver');
@@ -29,11 +24,18 @@ app.configure(function() {
   app.use(express.cookieParser());
   app.use(express.bodyParser());
   app.use(express.session({ secret: 'keyboard cat' }));
+  app.use(flash());
+  app.use(function(req, res, next) {
+    res.locals.info = req.flash('info');
+    res.locals.error = req.flash('error');
+    next();
+  });
   app.use(passport.initialize());
   app.use(passport.session());
-  app.use(flash());
   app.use(app.router);
 });
+
+require('./config/passport')(passport);
 
 var MONGO = {
     uri: process.env.MONGOHQ_URL || 'mongodb://localhost/disgoDB',
@@ -63,15 +65,12 @@ app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded());
-//app.use(require('connect-multipart')())
 app.use(express.methodOverride());
 app.use(express.cookieParser('Intro HCI secret key'));
 app.use(express.session());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(partials());
-
-//app.dynamicHelpers({flash: function(req, res) { return req.flash(); }});
 
 // development only
 if ('development' == app.get('env')) {
@@ -118,8 +117,7 @@ app.get('/rides/request', ensureAuthenticated, rides.request);
 app.post('/rides/submit', ensureAuthenticated, rides.submit);
 app.get('/rides/:id/review', ensureAuthenticated, rides.review);
 app.post('/rides/:id/approve', ensureAuthenticated, rides.approve);
-app.get('/rides/edit/:id', ensureAuthenticated, rides.edit);
-app.get('/rides/delete/:id', ensureAuthenticated, rides.edit)
+app.get('/rides/:id/edit', ensureAuthenticated, rides.edit);
 
 
 http.createServer(app).listen(app.get('port'), function(){

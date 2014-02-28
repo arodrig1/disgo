@@ -10,10 +10,11 @@
 <div class="container-fluid">
 
   <div class="col-xs-12">
-    <h1><span class="fa fa-sign-in"></span>Login</h1>
+    <h1>Welcome to Disgo!</h1>
+    <h3><span class="fa fa-sign-in"></span>Login</h3>
 
-    {{#if message}}
-      <div class="alert alert-danger">{{message}}</div>
+    {{#if error}}
+      <div class="alert alert-danger">{{error}}</div>
     {{/if}}
 
     <form action="/login" method="post">
@@ -27,7 +28,7 @@
       </div>
 
 
-      <button type="submit" class="btn btn-warning btn-lg">Login</button>
+      <button type="submit" class="btn btn-danger btn-lg">Login</button>
     </form>
 
     <hr>

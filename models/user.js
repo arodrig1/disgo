@@ -10,7 +10,6 @@ var User = function() {
     var UserSchema = new Schema({
         type: { type: Number, required: true },//0 = driver, 1 = rider, 2 = coordinator
         username: { type: String, required: true, unique: true },
-        //userId: { type: Number, required: true }, //the id of the specific user within that table (may not need)
         salt: { type: String},
         hash: { type: String},
         Name: { type: String},
@@ -51,7 +50,6 @@ var User = function() {
     };
 
     var _validatePassword = function(username, password, done) {
-    //var _validatePassword = function(username, password, callbackFn) {
         _model.findOne({'username' : username}, function(err, user){
             if(err) return done(err);
             if(!user) return done(null, false, { message : 'Incorrect username.' });
@@ -61,14 +59,6 @@ var User = function() {
                 if(hash == user.hash) return done(null, user);
                 else return done(null, false, { message : 'Incorrect password' });
             });
-            /*if (err) return callbackFn({ success: false, message: err });
-            if (!user) return callbackFn({ success: false, message : 'Incorrect username.' });
-            hash(password, Buffer(user.salt, 'base64'), function(err, hash) {
-                if (err) return callbackFn({ success: false, message: err });
-                hash = Buffer(hash, 'binary').toString('base64');
-                if(hash == user.hash) return callbackFn({ success: true, message: null });
-                else return callbackFn({ success: false, message: 'Incorrect password' });
-            });*/
         });
     };
 
@@ -78,7 +68,6 @@ var User = function() {
                 console.log(err);
                 throw err;
             }
-            console.log(riderDocs);
             _model.update({_id: user.id}, {$push: { rides: riderDocs }},{upsert:true}, callback);
         });
     }
