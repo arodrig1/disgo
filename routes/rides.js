@@ -29,6 +29,7 @@ var _submit = function(req, res) {
     time: req.body.ridetime
   };
   User.saveRide(req.user, newRide, function(){});
+  req.flash('info', "Ride submitted!");
   res.redirect('rider/home');
 }
 
@@ -45,12 +46,12 @@ var _updateRide = function(req, res) {
 
 var _review = function(req, res) {
   //console.log("Fetching ride to review from database...");
-    res.render('rides/review');
+   res.render('rides/review');
 }
 
 var _approve = function(req, res) {
   //console.log("Approving ride in database...");
-    //req.session.returnTo = request.path;
+  //req.session.returnTo = request.path;
   res.redirect('/coordinator/home');
 }
 

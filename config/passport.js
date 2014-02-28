@@ -16,17 +16,13 @@ module.exports = function(passport) {
   passport.use('local', new LocalStrategy(
     function(username, password, done) {
       return User.validatePassword(username, password, done);
-      /*User.validatePassword(username, password, function(status) {
-        if (status['success']) return done(null, status['user']);
-        else return done(null, false, { message: status['message'] });
-      });*/
     }));
 
   passport.use('signup', new LocalStrategy({ passReqToCallback: true },
     function(req, username, password, done) {
       User.findOne(username, done, function(err, user) {
         if (err) return done(err);
-        if (user) return done(null, false, { message: "That username is already taken" });
+        if (user) return done(null, false, { message: req.flash('error', "That username is already taken") });
         else {
           return User.create(req.body.realname, username, password, req.body.type, done);
         }
