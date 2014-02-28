@@ -41,6 +41,7 @@ var _updateRide = function(req, res) {
     time: req.body.ridetime
   };
   Ride.updateById(req.params["id"], updatedRide, function(){});
+  req.flash('info', "Ride updated!");
   res.redirect('rider/home');
 }
 
@@ -59,7 +60,7 @@ var _edit = function(req, res) {
   var ID = req.params["id"];
   Ride.findById(ID, function(err, ride) {
         if (err) throw err;
-        console.log(ride);
+        //console.log(ride);
         res.render('rides/edit', {'to': ride.to, 'from': ride.from, 'rideId':ID});
     });
 }
