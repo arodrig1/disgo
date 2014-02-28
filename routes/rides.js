@@ -70,7 +70,8 @@ var _deleteRide = function(req, res) {
   //ADD A CONFIRMATION
   Ride.removeById(ID, function(err, rides) {
         if (err) throw err;
-        console.log(rides);
+        //console.log(rides);
+        req.flash('info', "Ride deleted!");
         res.redirect('rider/home');
     });
 }
