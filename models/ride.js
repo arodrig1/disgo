@@ -33,11 +33,27 @@ var Ride = function() {
         _model.find({ riderUsername: rider }).sort({ date: 'asc' }).sort({ time: 'asc' }).exec(callback);
     }
 
+    var _findById = function (riderId, callback) {
+        _model.findById(new _ObjectId(riderId)).exec(callback);
+    }
+
+    var _removeById = function (riderId, callback) {
+        _model.remove({_id: new _ObjectId(riderId)}, callback);
+    }
+
+    var _updateById = function (riderId, riderJSON, callback) {
+        //FIX SET
+        _model.update({_id: riderId}, {'$set': {from: riderJSON.from, to:riderJSON.to, date:riderJSON['date'], time:riderJSON['time']}},{upsert:true}, callback);
+    }
+
     return {
         schema: RideSchema,
         save: _save,
         findByDriverUsername: _findByDriverUsername,
-        findByRiderUsername: _findByRiderUsername
+        findByRiderUsername: _findByRiderUsername,
+        findById: _findById,
+        removeById: _removeById,
+        updateById: _updateById
     };
 }();
 

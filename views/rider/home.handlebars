@@ -8,10 +8,12 @@
   <link rel="stylesheet" type="text/css" href="/css/normalize.css">
   <link rel="stylesheet" type="text/css" href="/css/webflow.css">
   <link rel="stylesheet" type="text/css" href="/css/disgo.webflow.css">
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
   <script>
     if (/mobile/i.test(navigator.userAgent)) document.documentElement.className += ' w-mobile';
   </script>
   <link rel="shortcut icon" type="image/x-icon" href="https://y7v4p6k4.ssl.hwcdn.net/placeholder/favicon.ico">
+
 
 </head>
 <body class="bgcolor-black">
@@ -25,7 +27,7 @@
 
   <div class="container">
   {{#each rides}}
-    <div class="thumbnail" id="ride{{id}}">
+    <div class="thumbnail" id="{{_id}}">
       <div class="bgcolor-red">
       <h5 class="h5" align=center>{{date}}</h5>
       <h5 class="h5" align=center><strong>{{time}}</strong></h5></div>
@@ -34,13 +36,16 @@
         <li>From: <b>{{from}}</b></li>
         <li>To: <b>{{to}}</b></li>
       </ul>
-     <button type="button" href="/rides/deleteRide/:{{id}}" class="btn btn-danger btn-xs">Delete</button>
-      <button type="button" href="/rides/edit/:{{id}}" class="btn btn-info btn-xs">Edit</button>
+     <a href="/rides/deleteRide/{{_id}}" id="deleteButton"><button type="button" class="btn btn-danger btn-xs">Delete</button></a>
+      <a href="/rides/edit/{{_id}}"><button type="button" class="btn btn-info btn-xs">Edit</button></a>
     </div>
    {{/each}}
    </div>
-   
+
+   <script type="text/javascript" src="/js/bootstrap-modal.js"></script>
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <script type="text/javascript" src="/js/webflow.js"></script>
+
+  
 </body>
 </html>

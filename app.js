@@ -119,8 +119,8 @@ app.post('/rides/submit', ensureAuthenticated, rides.submit);
 app.get('/rides/:id/review', ensureAuthenticated, rides.review);
 app.post('/rides/:id/approve', ensureAuthenticated, rides.approve);
 app.get('/rides/edit/:id', ensureAuthenticated, rides.edit);
-app.get('/rides/delete/:id', ensureAuthenticated, rides.edit)
-
+app.get('/rides/deleteRide/:id', ensureAuthenticated, rides.deleteRide);
+app.post('/rides/update/:id', ensureAuthenticated, rides.updateRide);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

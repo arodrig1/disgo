@@ -13,6 +13,7 @@ var _list = function(req, res) {
 }
 
 var _request = function(req, res) {
+  console.log("REQUEST");
     res.render('rides/request');
 }
 
@@ -31,6 +32,17 @@ var _submit = function(req, res) {
   res.redirect('rider/home');
 }
 
+var _updateRide = function(req, res) {
+  var updatedRide = {
+    to: req.body.dropdown2,
+    from: req.body.dropdown1,
+    date: req.body.date,
+    time: req.body.ridetime
+  };
+  Ride.updateById(req.params["id"], updatedRide, function(){});
+  res.redirect('rider/home');
+}
+
 var _review = function(req, res) {
   //console.log("Fetching ride to review from database...");
     res.render('rides/review');
@@ -43,13 +55,22 @@ var _approve = function(req, res) {
 }
 
 var _edit = function(req, res) {
-  var rideID = req.rideID;
-  var ride = Ride.findById(rideID);
-  res.render('rides/edit', ride);
+  var ID = req.params["id"];
+  Ride.findById(ID, function(err, ride) {
+        if (err) throw err;
+        console.log(ride);
+        res.render('rides/edit', {'to': ride.to, 'from': ride.from, 'rideId':ID});
+    });
 }
 
 var _deleteRide = function(req, res) {
-
+  var ID = req.params["id"];
+  //ADD A CONFIRMATION
+  Ride.removeById(ID, function(err, rides) {
+        if (err) throw err;
+        console.log(rides);
+        res.redirect('rider/home');
+    });
 }
 
 module.exports = {
@@ -59,5 +80,6 @@ module.exports = {
     review: _review,
     approve: _approve,
     edit: _edit,
-    deleteRide: _deleteRide
+    deleteRide: _deleteRide,
+    updateRide: _updateRide
 }
