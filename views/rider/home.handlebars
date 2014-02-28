@@ -14,24 +14,27 @@
   <link rel="shortcut icon" type="image/x-icon" href="https://y7v4p6k4.ssl.hwcdn.net/placeholder/favicon.ico">
 
 </head>
-<body>
+<body class="bgcolor-black">
   {{> navbar}}
+  <a class="btn btn-primary btn-block" style="border-top:4px solid #FFFFFF;" href="/rides/request">Request a Ride</a>
   <div class="page-header">
-    <center><h1>Welcome Rider! </h1></center>
-    <a class="btn btn-primary btn-block" href="/rides/request">Request a Ride</a>
-    <center><h4> Rides: </h4><center>
+    <center><h2>Welcome {{name}}! </h2></center>
   </div>
+
+  <center><h4 style="color:white"> Rides: </h4><center>
 
   <div class="container">
   {{#each rides}}
     <div class="thumbnail" id="ride{{id}}">
+      <div class="bgcolor-red">
       <h5 class="h5" align=center>{{date}}</h5>
-      <h5 class="h5" align=center><strong>{{time}}</strong></h5>
+      <h5 class="h5" align=center><strong>{{time}}</strong></h5></div>
       <ul class="list-unstyled">
         <li>Driver: <b>{{driver}}</b></li>
         <li>From: <b>{{from}}</b></li>
         <li>To: <b>{{to}}</b></li>
       </ul>
+     
     </div>
    {{/each}}
    </div>
