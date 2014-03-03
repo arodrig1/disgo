@@ -13,6 +13,7 @@ var User = function() {
         salt: { type: String},
         hash: { type: String},
         Name: { type: String},
+        tel: { type: String},
         rides: [{ type: _ObjectId, ref: 'Ride' }]
     });
 
@@ -28,7 +29,7 @@ var User = function() {
         _model.findOne({ username: username }).exec(callback);
     };
 
-    var _create = function(name, username, password, type, done){
+    var _create = function(name, username, password, tel, type, done){
         try {
             var salt = Crypto.randomBytes(256);
         } catch (ex) {
@@ -41,6 +42,7 @@ var User = function() {
                         'username' : username,
                         'salt' : Buffer(salt, 'binary').toString('base64'),
                         'hash' : Buffer(hash, 'binary').toString('base64'),
+                        'tel' : tel,
                         'type' : type
                     }, function(err, user) {
                         if(err) {throw err;}
