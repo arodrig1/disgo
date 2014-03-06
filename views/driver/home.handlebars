@@ -23,17 +23,21 @@
   <center><h4 style="color:white"> Rides: </h4><center>
 
   <div class="container">
-  {{#each rides}}
-  <div class="thumbnail" id="ride{{id}}">
-    <h5 class="h5" align=center> {{date}} </h5>
-    <h5 class="h5" align=center> <strong>{{time}}</strong> </h5>
-    <ul class="list-unstyled">
-      <li>Rider: <b>{{rider}}</b></li>
-      <li>From: <b>{{from}}</b></li>
-      <li>To: <b>{{to}}</b></li>
-    </ul>
-  </div>
-  {{/each}}
+  {{#if rides.length}}
+    {{#each rides}}
+    <div class="thumbnail" id="ride{{id}}">
+      <h5 class="h5" align=center> {{date}} </h5>
+      <h5 class="h5" align=center> <strong>{{time}}</strong> </h5>
+      <ul class="list-unstyled">
+        <li>Rider: <b>{{rider}}</b></li>
+        <li>From: <b>{{from}}</b></li>
+        <li>To: <b>{{to}}</b></li>
+      </ul>
+    </div>
+    {{/each}}
+  {{else}}
+    <div>No rides to display.</div>
+  {{/if}}
 </div>
 
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>

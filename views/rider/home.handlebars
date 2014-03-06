@@ -8,6 +8,7 @@
   <link rel="stylesheet" type="text/css" href="/css/normalize.css">
   <link rel="stylesheet" type="text/css" href="/css/webflow.css">
   <link rel="stylesheet" type="text/css" href="/css/disgo.webflow.css">
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <script type="text/javascript" src="/js/bootstrap.js"></script>
   <script type="text/javascript" src="/js/introHCI.js"></script>
   <script>
@@ -33,6 +34,12 @@
         <h5 class="h5" align=center>{{date}}</h5>
         <h5 class="h5" align=center><strong>{{time}}</strong></h5></div>
         {{#if alt}}
+        <ul class="list-group">
+          <li class="list-group-item">Driver: <b>{{driver}}</b></li>
+          <li class="list-group-item">From: <b>{{from}}</b></li>
+          <li class="list-group-item">To: <b>{{to}}</b></li>
+        </ul>
+        {{else}}
         <ul class="list-unstyled">
           <li>Driver: <b>{{driver}}</b></li>
           <li>From: <b>{{from}}</b></li>
@@ -44,12 +51,6 @@
         <a href="/rides/edit/{{_id}}">
           <button type="button" class="btn btn-info btn-xs">Edit</button>
         </a>
-        {{else}}
-        <ul class="list-group">
-          <li class="list-group-item">Driver: <b>{{driver}}</b></li>
-          <li class="list-group-item">From: <b>{{from}}</b></li>
-          <li class="list-group-item">To: <b>{{to}}</b></li>
-        </ul>
         {{/if}}
       </div>    
      {{/each}}
@@ -57,10 +58,6 @@
       <div>No rides to display.</div>
     {{/if}}
    </div>
-
-   <script type="text/javascript" src="/js/bootstrap-modal.js"></script>
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-  <script type="text/javascript" src="/js/webflow.js"></script>
 
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

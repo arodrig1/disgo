@@ -7,9 +7,6 @@
   <link rel="stylesheet" type="text/css" href="/css/normalize.css">
   <link rel="stylesheet" type="text/css" href="/css/webflow.css">
   <link rel="stylesheet" type="text/css" href="/css/disgo.webflow.css">
-  <!--<script>
-    if (/mobile/i.test(navigator.userAgent)) document.documentElement.className += ' w-mobile';
-  </script>-->
 
   <link rel="shortcut icon" type="image/x-icon" href="https://y7v4p6k4.ssl.hwcdn.net/placeholder/favicon.ico">
   
@@ -26,14 +23,19 @@
   {{/if}}
 
   <script type="text/javascript">
-    $.(document).ready(function() {
+    $(document).ready(function() {
       var startTime = new Date().getTime();
 
-      $('form').submit(function (e) {
+      $('#submitBtn').click(function(e) {
         var endTime = new Date().getTime();
         var elapsed = endTime - startTime;
-        ga('send', 'timing', 'ride', 'request');
+        $('#elapsedInput').value(elapsed);
+        ga('send', 'event', 'rides', 'request', elapsed, { 'hitCallback': function() {
+            $('form').submit();
+          }
+        });
       });
+
     });
   </script>
 </head>
@@ -44,9 +46,19 @@
   </div>
   <div class="w-form">
     <form name="wf-form-request-ride-form" action="/rides/submit" method="post" data-name="Request Ride Form">
+      <input type="hidden" name="elapsed" id="elapsedInput"></input>
+      {{#if alt}}
+        <input type="hidden" name="testSet" value="B"></input>
+      {{else}}
+        <input type="hidden" name="testSet" value="A"></input>
+      {{/if}}
       <label for="from">From:</label>
       <select class="w-select" name="dropdown1" autofocus required>
+        {{#if alt}}
+        <option value=""></option>
+        {{else}}
         <option value="">Select one...</option>
+        {{/if}}
         <option value="Arrillaga Gym East">Arrillaga Gym East</option>
         <option value="Arrillaga Gym West">Arrillaga Gym West</option>
         <option value="Bld 200">Bld 200</option>
@@ -88,7 +100,11 @@
       </select>
       <label for="to">To:</label>
       <select class="w-select" name="dropdown2" required>
+        {{#if alt}}
+        <option value=""></option>
+        {{else}}
         <option value="">Select one...</option>
+        {{/if}}
         <option value="Arrillaga Gym East">Arrillaga Gym East</option>
         <option value="Arrillaga Gym West">Arrillaga Gym West</option>
         <option value="Bld 200">Bld 200</option>
@@ -135,7 +151,7 @@
       <div></div>
       <div></div>
       <button class="w-button" onclick="window.location='/';return false;" value="Cancel" data-wait="Please wait...">Cancel</button>
-      <input class="w-button" type="submit" value="Submit" data-wait="Please wait..."></input>
+      <button class="w-button" id="submitBtn" value="Submit" data-wait="Please wait...">Submit</button>
     </form>
     <div class="w-form-done">
       <p>Thank you! Your submission has been received!</p>

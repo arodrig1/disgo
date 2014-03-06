@@ -4,6 +4,7 @@ Driver = require('../models/driver.js'),
 Rider = require('../models/rider.js'),
 Ride = require('../models/ride.js'),
 User = require('../models/user.js'),
+Timing = require('../models/timing.js'),
 ObjectId = mongoose.Types.ObjectId;
 
 var _list = function(req, res) {
@@ -31,6 +32,7 @@ var _requestb = function(req, res) {
 }
 
 var _submit = function(req, res) {
+  Timing.create("Ride request", req.body.testSet, req.body.elapsed, function(){});
   var newRide = {
     driverUsername: "bayian",//CHANGE ME!
     driver: "Bayian",//CHANGE ME!
