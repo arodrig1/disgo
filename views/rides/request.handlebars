@@ -15,7 +15,7 @@
   '" type="text/javascript" charset="utf-8"><\/sc'+'ript>')})();
   </script><script>utmx('url','A/B');</script>
   <!-- End of Google Analytics Content Experiment code -->
-  
+
   <meta charset="utf-8">
   <title>DisGo - Request Ride</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -44,7 +44,7 @@
       $('#submitBtn').click(function(e) {
         var endTime = new Date().getTime();
         var elapsed = endTime - startTime;
-        $('#elapsedInput').value(elapsed);
+        $('#elapsedInput').val(elapsed);
         ga('send', 'event', 'rides', 'request', elapsed, { 'hitCallback': function() {
             $('form').submit();
           }
