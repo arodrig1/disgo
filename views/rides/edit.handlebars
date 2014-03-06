@@ -20,7 +20,8 @@
   </div>
   
   <div class="w-form">
-    <form name="wf-form-request-ride-form" action="/rides/update/{{rideId}}" method="post" data-name="Request Ride Form">
+    {{#with ride}}
+    <form name="wf-form-request-ride-form" action="/rides/update/{{id}}" method="post" data-name="Request Ride Form">
       <label for="from">From:</label>
       <select class="w-select" name="dropdown1" autofocus required>
         <option disabled hidden value=''></option>
@@ -108,14 +109,15 @@
         <option value="Wilbur Hall">Wilbur Hall</option>
       </select>
       <label for="time">Time:</label>
-      <input type="time" min="08:15:00" max="17:10:00" name="ridetime" required></input>
+      <input type="time" min="08:15:00" max="17:10:00" name="ridetime" vale="{{time}}" required></input>
       <label for="date-local">Date:</label>
-      <input type="date" name="date" required></input>
+      <input type="date" name="date" value="{{date}}" required></input>
       <div></div>
       <div></div>
       <button class="w-button" onclick="window.location='/';return false;" value="Cancel" data-wait="Please wait...">Cancel</button>
       <input class="w-button" type="submit" value="Submit" data-wait="Please wait..."></input>
     </form>
+    {{/with}}
     <div class="w-form-done">
       <p>Thank you! Your submission has been received!</p>
     </div>

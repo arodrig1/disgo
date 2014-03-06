@@ -20,9 +20,27 @@ var _home = function(req, res) {
             if (hour > 12) hour = hour - 12;
             rides[i].time = hour + rides[i].time.slice(2,5);
         }
-        res.render('rider/home', { 'rides': rides, 'name': first_name});
+        res.render('rider/home', { 'rides': rides, 'name': first_name, 'alt': false});
     });
 }
+
+/*var _homeb = function(req, res) {
+    var user = req.user;
+    var name = user.Name;
+    var name_array = name.split(" ");
+    var first_name = name_array[0];
+    Ride.findByRiderUsername(user.username, function(err, rides) {
+        if (err) throw err;
+        for (var i = 0; i < rides.length; i++) {
+            rides[i] = rides[i].toObject();
+            rides[i].date = rides[i].date.toDateString().split(" ").slice(0, 4).join(" ");
+            var hour = parseInt(rides[i].time);
+            if (hour > 12) hour = hour - 12;
+            rides[i].time = hour + rides[i].time.slice(2,5);
+        }
+        res.render('rider/home', { 'rides': rides, 'name': first_name, 'alt': true});
+    });
+}*/
 
 var _addRide = function(req, res) {
 
@@ -30,4 +48,5 @@ var _addRide = function(req, res) {
 
 module.exports = {
     home: _home
+    //homeb: _homeb
 }

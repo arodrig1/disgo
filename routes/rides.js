@@ -12,9 +12,22 @@ var _list = function(req, res) {
 	res.render('rides/index', ride);
 }
 
+var _getTodayString = function() {
+  var today = new Date();
+  var month = today.getMonth() + 1;
+  var day = today.getDate();
+  if (month < 10) month = '0' + month;
+  if (day < 10) day = '0' + day;
+  today = today.getFullYear() + '-' + month + '-' + day;
+  return today;
+}
+
 var _request = function(req, res) {
-  console.log("REQUEST");
-    res.render('rides/request');
+  res.render('rides/request', { 'today': _getTodayString(), 'alt': false });
+}
+
+var _requestb = function(req, res) {
+  res.render('rides/request', { 'today': _getTodayString(), 'alt': true });
 }
 
 var _submit = function(req, res) {
@@ -59,9 +72,8 @@ var _approve = function(req, res) {
 var _edit = function(req, res) {
   var ID = req.params["id"];
   Ride.findById(ID, function(err, ride) {
-        if (err) throw err;
-        //console.log(ride);
-        res.render('rides/edit', {'to': ride.to, 'from': ride.from, 'rideId':ID});
+      if (err) throw err;
+      res.render('rides/edit', {'ride': ride, 'today': _getTodayString() });
     });
 }
 
@@ -79,6 +91,7 @@ var _deleteRide = function(req, res) {
 module.exports = {
     list: _list,
     request: _request,
+    requestb: _requestb,
     submit: _submit,
     review: _review,
     approve: _approve,

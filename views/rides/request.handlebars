@@ -7,11 +7,35 @@
   <link rel="stylesheet" type="text/css" href="/css/normalize.css">
   <link rel="stylesheet" type="text/css" href="/css/webflow.css">
   <link rel="stylesheet" type="text/css" href="/css/disgo.webflow.css">
-  <script>
+  <!--<script>
     if (/mobile/i.test(navigator.userAgent)) document.documentElement.className += ' w-mobile';
-  </script>
+  </script>-->
+
   <link rel="shortcut icon" type="image/x-icon" href="https://y7v4p6k4.ssl.hwcdn.net/placeholder/favicon.ico">
-  <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+  <script type="text/javascript" src="/js/webflow.js"></script>
+
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/jquery.searchabledropdown-1.0.8.min.js"></script>
+  {{#if alt}}
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $('select').searchable();
+      });
+    </script>
+  {{/if}}
+
+  <script type="text/javascript">
+    $.(document).ready(function() {
+      var startTime = new Date().getTime();
+
+      $('form').submit(function (e) {
+        var endTime = new Date().getTime();
+        var elapsed = endTime - startTime;
+        ga('send', 'timing', 'ride', 'request');
+      });
+    });
+  </script>
 </head>
 <body>
   {{> navbar}}
@@ -107,7 +131,7 @@
       <label for="time">Time:</label>
       <input type="time" min="08:15:00" max="17:10:00" name="ridetime" required></input>
       <label for="date-local">Date:</label>
-      <input type="date" name="date" required></input>
+      <input type="date" name="date" value="{{today}}" min="{{today}}" required></input>
       <div></div>
       <div></div>
       <button class="w-button" onclick="window.location='/';return false;" value="Cancel" data-wait="Please wait...">Cancel</button>
@@ -120,7 +144,16 @@
       <p>Oops! Something went wrong while submitting the form :(</p>
     </div>
   </div>
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-  <script type="text/javascript" src="/js/webflow.js"></script>
+
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-48674310-2', 'disgo.herokuapp.com');
+    ga('send', 'pageview');
+
+  </script>
 </body>
 </html>

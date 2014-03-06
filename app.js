@@ -104,6 +104,7 @@ app.get('/about', index.about);
 app.get('/help', index.help);
 
 app.get('/rider/home', ensureAuthenticated, rider.home);
+//app.get('/rider/homeb', ensureAuthenticated, rider.homeb);
 //app.get('/rider/addRide', rider.addRide);
 //app.get('/rider/editRide/:id', rider.editRide);
 
@@ -114,6 +115,7 @@ app.get('/coordinator/home', ensureAuthenticated, coordinator.home);
 
 app.get('/rides', ensureAuthenticated, rides.list);
 app.get('/rides/request', ensureAuthenticated, rides.request);
+app.get('/rides/requestb', ensureAuthenticated, rides.requestb);
 app.post('/rides/submit', ensureAuthenticated, rides.submit);
 app.get('/rides/:id/review', ensureAuthenticated, rides.review);
 app.post('/rides/:id/approve', ensureAuthenticated, rides.approve);

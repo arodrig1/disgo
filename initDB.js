@@ -1,12 +1,30 @@
 var mongoose = require('mongoose');
 var User = require('./models/user.js');
+var Coordinator = require('./models/coordinator.js');
+var Driver = require('./models/driver.js');
+var Ride = require('./models/ride.js');
+var Rider = require('./models/rider.js');
 
 // Connect to the Mongo database, whether locally or on Heroku
 // MAKE SURE TO CHANGE THE NAME FROM 'lab7' TO ... IN OTHER PROJECTS
-var local_database_name = 'disgoDB';
-var local_database_uri  = 'mongodb://localhost/' + local_database_name
-var database_uri = process.env.MONGOHQ_URL || local_database_uri
-mongoose.connect(database_uri);
+var MONGO = {
+    uri: process.env.MONGOHQ_URL || 'mongodb://localhost/disgoDB',
+    options: {
+        server:{
+            auto_reconnect: true,
+            poolSize: 10,
+            socketOptions:{
+                keepAlive: 1
+            }
+        },
+        db: {
+            numberOfRetries: 10,
+            retryMiliSeconds: 1000
+        }
+    }
+}
+
+mongoose.connect(MONGO.uri, MONGO.options);
 
 // Do the initialization here
 
@@ -17,7 +35,26 @@ var users_json = require('./users.json');
 User.model
   .find()
   .remove()
-  .exec(onceClear); // callback to continue at
+  .exec(function(){ console.log("done wiping users"); }); // callback to continue at
+
+/*Coordinator.model
+  .find()
+  .remove()
+  .exec(onceClear);*/
+
+/*  .find()
+  .remove()
+  .exec(onceClear);*/
+
+Ride.model
+  .find()
+  .remove()
+  .exec(function(){ console.log("done wiping rides"); });
+
+/*Rider.model
+  .find()
+  .remove()
+  .exec(onceClear);*/
 
 // Step 3: load the data from the JSON file
 function onceClear(err) {
@@ -25,7 +62,7 @@ function onceClear(err) {
 
   // loop over the projects, construct and save an object from each one
   // Note that we don't care what order these saves are happening in...
-  var to_save_count = users_json.length;
+  /*var to_save_count = users_json.length;
   for(var i=0; i<users_json.length; i++) {
     var json = users_json[i];
     var user = new User.model(json);
@@ -42,5 +79,5 @@ function onceClear(err) {
         mongoose.connection.close()
       }
     });
-  }
+  }*/
 }

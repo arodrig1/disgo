@@ -10,4 +10,7 @@ $(document).ready(function() {
  */
 function initializePage() {
 	// add any functionality and listeners you want here
+	$('div.thumbnail').click(function(e) {
+		ga("send", "event", )
+	});
 }

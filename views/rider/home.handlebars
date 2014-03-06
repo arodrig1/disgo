@@ -9,11 +9,11 @@
   <link rel="stylesheet" type="text/css" href="/css/webflow.css">
   <link rel="stylesheet" type="text/css" href="/css/disgo.webflow.css">
   <script type="text/javascript" src="/js/bootstrap.js"></script>
+  <script type="text/javascript" src="/js/introHCI.js"></script>
   <script>
     if (/mobile/i.test(navigator.userAgent)) document.documentElement.className += ' w-mobile';
   </script>
   <link rel="shortcut icon" type="image/x-icon" href="https://y7v4p6k4.ssl.hwcdn.net/placeholder/favicon.ico">
-
 
 </head>
 <body class="bgcolor-black">
@@ -26,20 +26,36 @@
   <center><h4 style="color:white"> Rides: </h4><center>
 
   <div class="container">
-  {{#each rides}}
-    <div class="thumbnail" id="{{_id}}">
-      <div class="bgcolor-red">
-      <h5 class="h5" align=center>{{date}}</h5>
-      <h5 class="h5" align=center><strong>{{time}}</strong></h5></div>
-      <ul class="list-unstyled">
-        <li>Driver: <b>{{driver}}</b></li>
-        <li>From: <b>{{from}}</b></li>
-        <li>To: <b>{{to}}</b></li>
-      </ul>
-     <a href="/rides/deleteRide/{{_id}}" id="deleteButton"><button type="button" class="btn btn-danger btn-xs">Delete</button></a>
-      <a href="/rides/edit/{{_id}}"><button type="button" class="btn btn-info btn-xs">Edit</button></a>
-    </div>
-   {{/each}}
+  {{#if rides.length}}
+    {{#each rides}}
+      <div class="thumbnail" id="{{_id}}">
+        <div class="bgcolor-red">
+        <h5 class="h5" align=center>{{date}}</h5>
+        <h5 class="h5" align=center><strong>{{time}}</strong></h5></div>
+        {{#if alt}}
+        <ul class="list-unstyled">
+          <li>Driver: <b>{{driver}}</b></li>
+          <li>From: <b>{{from}}</b></li>
+          <li>To: <b>{{to}}</b></li>
+        </ul>
+        <a href="/rides/deleteRide/{{_id}}" id="deleteButton">
+          <button type="button" class="btn btn-danger btn-xs">Delete</button>
+        </a>
+        <a href="/rides/edit/{{_id}}">
+          <button type="button" class="btn btn-info btn-xs">Edit</button>
+        </a>
+        {{else}}
+        <ul class="list-group">
+          <li class="list-group-item">Driver: <b>{{driver}}</b></li>
+          <li class="list-group-item">From: <b>{{from}}</b></li>
+          <li class="list-group-item">To: <b>{{to}}</b></li>
+        </ul>
+        {{/if}}
+      </div>    
+     {{/each}}
+    {{else}}
+      <div>No rides to display.</div>
+    {{/if}}
    </div>
 
    <script type="text/javascript" src="/js/bootstrap-modal.js"></script>

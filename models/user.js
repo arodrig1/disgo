@@ -45,7 +45,7 @@ var User = function() {
                         'tel' : tel,
                         'type' : type
                     }, function(err, user) {
-                        if(err) {throw err;}
+                        if(err) { console.log(err); }
                         done(null, user);
                     });
         });
