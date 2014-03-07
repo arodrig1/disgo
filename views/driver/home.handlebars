@@ -16,20 +16,22 @@
 </head>
 <body class="bgcolor-black">
   {{> navbar}}
-  <div class="page-header">
+  <div class="page-header" style="border-bottom:1px solid #BDBDBD">
     <center><h2>Welcome {{name}}! </h2></center>
   </div>
 
-  <center><h4 style="color:white"> Rides: </h4><center>
+  <center><h4 style="color:black"> Rides: </h4><center>
 
   <div class="container">
   {{#if rides.length}}
     {{#each rides}}
-    <div class="thumbnail" id="ride{{id}}">
+    <div class="thumbnail" id="ride{{id}}" style="border-bottom: 1px solid #BDBDBD; border-left: 1px solid #BDBDBD; border-right: 1px solid #BDBDBD;">
+      <div class="bgcolor-red">
       <h5 class="h5" align=center> {{date}} </h5>
-      <h5 class="h5" align=center> <strong>{{time}}</strong> </h5>
+      <h5 class="h5" align=center> <strong>{{time}}</strong> </h5></div>
       <ul class="list-unstyled">
         <li>Rider: <b>{{rider}}</b></li>
+        <li>Phone: <a href="tel:{{riderTel}}">{{riderTel}}</a> </li>
         <li>From: <b>{{from}}</b></li>
         <li>To: <b>{{to}}</b></li>
       </ul>

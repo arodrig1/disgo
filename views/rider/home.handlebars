@@ -19,38 +19,51 @@
 </head>
 <body class="bgcolor-black">
   {{> navbar}}
-  <a class="btn btn-primary btn-block" style="border-top:4px solid #FFFFFF;" href="/rides/request">Request a Ride</a>
-  <div class="page-header">
+  
+  <div class="page-header" style="border-bottom:1px solid #BDBDBD; border-top:1px solid #BDBDBD">
     <center><h2>Welcome {{name}}! </h2></center>
   </div>
 
-  <center><h4 style="color:white"> Rides: </h4><center>
+  <div style="padding-left: 70px; padding-right: 70px; overflow: hidden;">
+    <div style="float: left;">
+      <h4 style="color:black">Booked Rides:</h4>
+    </div>
+    <div align=center style="border-top:4px solid #E9E9E9; border-bottom:4px solid #E9E9E9; float: right;">
+      <a class="btn btn-primary"  href="/rides/request">Request a Ride</a>
+    </div>
+  </div> 
+
+  
 
   <div class="container">
   {{#if rides.length}}
     {{#each rides}}
-      <div class="thumbnail" id="{{_id}}">
+      <div class="thumbnail" id="{{_id}}" style="border-bottom: 1px solid #BDBDBD; border-left: 1px solid #BDBDBD; border-right: 1px solid #BDBDBD;">
         <div class="bgcolor-red">
         <h5 class="h5" align=center>{{date}}</h5>
         <h5 class="h5" align=center><strong>{{time}}</strong></h5></div>
         {{#if alt}}
-        <ul class="list-group">
+        <ul class="list-group" align=center>
           <li class="list-group-item">Driver: <b>{{driver}}</b></li>
+          <li class="list-group-item">Phone <a href="tel:{{driverTel}}">{{driverTel}}</a></li>
           <li class="list-group-item">From: <b>{{from}}</b></li>
           <li class="list-group-item">To: <b>{{to}}</b></li>
         </ul>
         {{else}}
-        <ul class="list-unstyled">
+        <ul class="list-unstyled" align=center>
           <li>Driver: <b>{{driver}}</b></li>
+          <li>Phone: <a href="tel:{{driverTel}}">{{driverTel}}</a></li>
           <li>From: <b>{{from}}</b></li>
           <li>To: <b>{{to}}</b></li>
         </ul>
+        <div align=center>
         <a href="/rides/deleteRide/{{_id}}" id="deleteButton">
           <button type="button" class="btn btn-danger btn-xs">Delete</button>
         </a>
         <a href="/rides/edit/{{_id}}">
           <button type="button" class="btn btn-info btn-xs">Edit</button>
         </a>
+      </div>
         {{/if}}
       </div>    
      {{/each}}

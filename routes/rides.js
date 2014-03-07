@@ -36,12 +36,14 @@ var _submit = function(req, res) {
   var newRide = {
     driverUsername: "bayian",//CHANGE ME!
     driver: "Bayian",//CHANGE ME!
+    driverTel: "555-555-5555",
     riderUsername: req.user.username,
     rider: req.user.Name,
     to: req.body.dropdown2,
     from: req.body.dropdown1,
     date: req.body.date,
-    time: req.body.ridetime
+    time: req.body.ridetime,
+    riderTel: req.user.tel
   };
   User.saveRide(req.user, newRide, function(){});
   req.flash('info', "Ride submitted!");

@@ -581,10 +581,10 @@ cite {
   text-align: center;
 }
 
-.bgcolor-black {background-color: #4D4F53;}
+.bgcolor-black {background-color: #E9E9E9;}
 
 .bgcolor-red {
-  background-color: #303035;
+  background-color: #4D4F53;
   color:#FFFFFF;
   padding: 5px;
   margin-bottom: 5px;

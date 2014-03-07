@@ -15,7 +15,9 @@ var Ride = function() {
         driverUsername: {type: String},
         riderUsername: {type: String, required: true},
         driver: {type: String},
-        rider: {type: String, required: true}
+        rider: {type: String, required: true},
+        riderTel: {type: String},
+        driverTel: {type: String}
     });
 
     var _model = mongoose.model('Ride', RideSchema);
