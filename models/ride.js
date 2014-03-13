@@ -28,11 +28,15 @@ var Ride = function() {
     }
 
     var _findByDriverUsername = function (driver, callback) {
-        _model.find({ driverUsername: driver }).sort({ date: 'asc' }).sort({ time: 'asc' }).exec(callback);
+        var yesterday = new Date();
+        yesterday.setDate(yesterday.getDate() - 1);
+        _model.find({ driverUsername: driver, date: { "$gte": yesterday } }).sort({ date: 'asc' }).sort({ time: 'asc' }).exec(callback);
     }
 
     var _findByRiderUsername = function (rider, callback) {
-        _model.find({ riderUsername: rider }).sort({ date: 'asc' }).sort({ time: 'asc' }).exec(callback);
+        var yesterday = new Date();
+        yesterday.setDate(yesterday.getDate() - 1);
+        _model.find({ riderUsername: rider, date: { "$gte": yesterday } }).sort({ date: 'asc' }).sort({ time: 'asc' }).exec(callback);
     }
 
     var _findById = function (riderId, callback) {

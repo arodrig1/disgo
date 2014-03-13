@@ -26,7 +26,7 @@
   {{/if}}
 
   <script type="text/javascript">
-    $(document).ready(function() {
+    /*$(document).ready(function() {
       var startTime = new Date().getTime();
 
       $('#submitBtn').click(function(e) {
@@ -39,7 +39,7 @@
         });
       });
 
-    });
+    });*/
   </script>
 </head>
 <body>
@@ -155,14 +155,9 @@
       <div></div>
       <br>
       <button class="w-button" onclick="window.location='/';return false;" value="Cancel" data-wait="Please wait...">Cancel</button>
-      <button class="w-button" id="submitBtn" value="Submit" data-wait="Please wait...">Submit</button>
+      <!--<button class="w-button" id="submitBtn" value="Submit" data-wait="Please wait...">Submit</button>-->
+      <input class="w-button" type="submit" value="Submit"></input>
     </form>
-    <div class="w-form-done">
-      <p>Thank you! Your submission has been received!</p>
-    </div>
-    <div class="w-form-fail">
-      <p>Oops! Something went wrong while submitting the form :(</p>
-    </div>
   </div>
 
   <script>
