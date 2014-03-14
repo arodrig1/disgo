@@ -6,12 +6,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="/css/normalize.css">
   <link rel="stylesheet" type="text/css" href="/css/webflow.css">
+  <link rel="stylesheet" type="text/css" href="/css/introHCI.css">
   <link rel="stylesheet" type="text/css" href="/css/disgo.webflow.css">
   <script>
     if (/mobile/i.test(navigator.userAgent)) document.documentElement.className += ' w-mobile';
   </script>
   <link rel="shortcut icon" type="image/x-icon" href="https://y7v4p6k4.ssl.hwcdn.net/placeholder/favicon.ico">
-  <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/jquery.validate.min.js"></script>
 </head>
 <body>
   {{> navbar}}
@@ -109,9 +111,9 @@
         <option value="Wilbur Hall">Wilbur Hall</option>
       </select>
       <label for="time">Time:</label>
-      <input type="time" min="08:15:00" max="17:10:00" name="ridetime" vale="{{time}}" required></input>
+      <input type="time" min="08:15:00" max="17:10:00" name="ridetime" value="{{time}}" required></input>
       <label for="date-local">Date:</label>
-      <input type="date" name="date" value="{{date}}" required></input>
+      <input type="date" name="date" value="{{date}}" min="{{today}}" required></input>
       <div></div>
       <div></div>
       <br>
@@ -126,7 +128,24 @@
       <p>Oops! Something went wrong while submitting the form :(</p>
     </div>
   </div>
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-  <script type="text/javascript" src="/js/webflow.js"></script>
+
+  <script type="text/javascript">
+    $('form').validate({
+      messages: {
+          to: "To is required.",
+          from: "From is required.",
+          time: {
+              required: "Time is required.",
+              min: "Time must be after 8:15a.",
+              max: "Time must be before 5:10p."
+          },
+          date: {
+            required: "Date is required.",
+            min: "Date cannot be in the past."
+          }
+      },
+      focusInvalid: false
+    });
+  </script>
 </body>
 </html>

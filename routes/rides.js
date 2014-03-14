@@ -77,7 +77,15 @@ var _edit = function(req, res) {
   var ID = req.params["id"];
   Ride.findById(ID, function(err, ride) {
       if (err) throw err;
-      res.render('rides/edit', {'ride': ride, 'today': _getTodayString() });
+      ride = ride.toObject();
+      var date = ride.date;
+      var month = date.getMonth() + 1;
+      var day = date.getDate();
+      if (month < 10) month = '0' + month;
+      if (day < 10) day = '0' + day;
+      ride.date = date.getFullYear() + '-' + month + '-' + day;
+      ride.today = _getTodayString();
+      res.render('rides/edit', {'ride': ride });
     });
 }
 
